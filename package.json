@@ -6,7 +6,7 @@
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus build; cd $(pwd)/.docusaurus/cn-gh-pages; git pull origin gh-pages; git push origin gh-pages; cd ../../;"
+    "deploy": "GIT_USER=sa1i USE_SSH=true docusaurus deploy"
   },
   "dependencies": {
     "@docusaurus/core": "^2.0.0-alpha.58",
