@@ -1,99 +1,101 @@
 ---
 id: backtest
-title: Backtest Report
-sidebar_label: Backtest
+title: 回测报告
+sidebar_label: 回测报告
 ---
 
-## Background
+## 研究背景
 
-PMM stands for Proactive Market Maker, which is essentially a quantitative trading strategy used by liquidity providers (LP). To help LP understand ROI of PMM, we’ve performed a backtest to demonstrate the performance of PMM in different market environments.
+PMM 算法代表主动做市商算法，实际上是流动性提供商使用的量化交易策略。为了让流动性提供商了解 PMM 算法的投资回报率，我们进行了一系列回测来检验 PMM 算法在不同市场环境下的表现。
 
-## Method
+## 研究方法
 
-Evaluation of PMM focuses on these two aspects: proﬁt and loss.
+我们对于 PMM 算法的评估主要集中在两个方面：收益和损失。
 
-The proﬁt for LP is turnover rate multiplied by fee rate.
+流动性提供商的收益是周转率和手续费费率的乘积。
 
-While the loss has to be explained in two perspectives, counterparty risk and arbitrage trading.
+损失需要从两个维度进行解释，交易对手风险和套利交易。
 
-Counterparty risk can be ignored in this case, because PMM has built a mechanism to limit this risk. In addition, the risk comes from trades by normal users, which are almost random and are statistically balanced against.
+因为PMM 算法里的限制，我们可以忽略交易对手的风险。另外，来自普通用户的交易，这些交易基本都是随机，在统计上相对平衡。
 
-Arbitrage trading is inevitable and contributes most of the loss, as onchain oracle price is always delayed from market.
+套利交易是不可避免的。因为链上预言机的价格相比于市价总是存在延迟，所以大部分的损失由套利交易产生。
 
-Hence, in the following backtesting, we focus on these two key values:
+因此在下面的回测中，我们重点关注两个关键值：
 
-- Turnover rate (profit wise)
-- Arbitrage loss (loss wise)
+- 周转率
+- 套利损失
 
-## Backtest
+## 回测
 
-### Profit evaluation
+### 收益评估
 
-Assumptions:
+假定：
 
-- Our pool size is 1/10 of uniswap's pool size
-- Base Token and Quote Token have the same value
-- PMM parameter k=0.1
-- Fee rate 0.3%
+- DODO 资金池规模是 Uniswap 资金池的十分之一 
+- base token 和 quote token 资产相等 
+- PMM 参数 k=0.1 
+- 手续费费率为 0.3% 
 
-Those assumptions are not set arbitrarily. Under this condition, PMM could provide the same liquidity as Uniswap, and hence it's reasonable to assume PMM has the same trading volume as Uniswap. However, because of aggregators, it's more realistic to assume PMM has half of the trading volume of Uniswap. According to [history data](https://uniswap.info/pair/0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc), PMM daily turnover rate is about 100% and ROI is 0.3%.
+这些条件不是随意设定的。在这种情况下，PMM 可以提供等同于 Uniswap 的流动性，所以可以合理地假定 PMM 跟 Uniswap 交易量相等。但是因为有聚合器，所以假定 PMM 可以提供 Uniswap 一半的流动性更合理些。 根据 [历史数据](https://uniswap.info/pair/0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc)得出, PMM 每日周转率是 100%, ROI 是 0.3%。
 
-:::note
-The backtest report is written at 2020/7/19. We use uniswap's historical data from 2020/6/1 to 2020/7/18.
+:::注意
+回测报告撰写于 2020年 7 月 19 日。回测数据使用 Uniswap 从 2020 年 6月1 日到 2020 年 7 月 18 日的历史数据。
 :::
 
-### Loss evaluation
+### 损失评估
 
-It's more complex to evaluate arbitrage loss, as no PMM-like algorithm has been deployed before. The best alternative is backtest with the most stringent standards. below is the assumptions:
+损失的评估会相对更复杂些，因为之前没有类似 PMM 算法的项目。我们选择使用最严格的标准进行回测，假定:
 
-- Onchain oracle price is always delayed from market price
-- Oracle price updates whenever deviates from market price by more than 0.5% (chainlink threshold)
-- Arbitrageurs always have enough funding and never miss a trade
-- The external cost of arbitrageurs is 0.2% (including CEX fees and gas cost)
+- 预言机价格总存在延迟
+- 预言机价格每次更新都与市价偏离 0.5%（Chainlink 上限） 
+- 套利者有充足的资金，不错过每笔交易 
+- 套利者搬砖成本为 0.2%（包括中心化交易所手续费和 gas） 
 
-We backtested using BTC price from Apr-2018 to Apr-2020 with 1 minute interval. Aggregate profit and loss, we got the following conclusions.
+我们使用 2018 年4 月到 2020 年 4月的 BTC 价格的历史数据，以1 分钟为间隔进行回测。综合收益和损失，得出以下结论。
 
 ![](https://dodoex.github.io/docs/img/dodo_backtest.png)
 
-## Conclusion
+## 结论
 
-The backtesting has covered most cases of the market environment, both the bull and bear market, even including the black swan event on 12th March. We concluded that:
+回测覆盖了绝大多数市场环境包括熊市、牛市，甚至包括 2020 年 3 月 12日的黑天鹅事件。我们得出的结论是：
 
-- In most market environments, the fee income is sufficient to cover arbitrage losses and provides a very high rate of return (~80% APR)
-- When the market changes volatilely, despite of rises or falls, LP will lose a significant amount of money
+- 在大多数市场环境下，手续费收入可以弥补套利损失，同时带来很高的回报率（年化约 80%）
+- 当市场剧烈波动时，不论涨跌，流动性提供商都会损失大量资金
 
-In brief, PMM makes proﬁts when the market is flat, while makes losses when volatile.
+一句话，PMM 算法在市场稳定时可以获利，在市场剧烈波动时会亏损。
 
-### Advantage & Disadvantage
+### 优劣势
 
-Most quant strategies make proﬁts only when market price goes up or down, and there is nothing to do when the market is flat. In contrast, PMM can make considerable proﬁts when the price is nearly flat. Furthermore, unlike AMM, PMM never requires LP to deposit base and quote assets at a certain ratio. Instead, LP could deposit any amount of any asset as they want. As a result, PMM can be a supplement to the original strategies when the market is not volatile.
+大多数量化策略只有在市场出现单边行情时才能盈利，在市场平稳时却挣不到钱。而PMM 却相反，在价格平稳变化时可以获得可观的收益。另外与 AMM 不同，PMM 算法不要求流动性提供商按照一定比例充入 base 和 quote token。所以当市场不稳定时，PMM 可以作为原有策略的补充。
 
-Nevertheless, we have to point out its disadvantages. As the old saying goes, there is no free lunch. When the market is volatile, LP suffers from significant loss. LP should make a balance between risks and beneﬁts. So we recommend traders withdraw their assets when they predict the market to be volatile. As a decentralized project, what we can do is very limited. But we would deﬁnitely try our best to adjust system parameters to help LP, especially when black swan event happens.
+俗话说，天上不会掉馅饼。当市场波动时，流动性提供商遭受巨大损失。流动性提供商需要平衡风险和收益。我们建议交易者在市场动荡时提出资产。作为一个去中心化项目，我们能做的非常有限。我们会尽量调整系统参数来帮助流动性提供商，尤其是在黑天鹅事件发生时。
 
-In addition, one of the inherent drawbacks of backtesting is it cannot simulate 100% of the real trading. But to mitigate this risk, we have performed the backtesting with the most conservative assumptions. Still, LP should determine to what extent they trust the backtesting result.
+另外，回测没办法 100% 模拟出真实交易的情况。为了降低这种风险，我们用最保守的假定条件进行回测。流动性提供商还是要理智地看待回测结果。
 
-### FAQ about backtest
+### 回测问题解答
 
-1. Where does the turnover rate data come from?
+1. 换手率数据怎么得到的？
 
-   We have counted the historical data of [Uniswap](https://uniswap.info/pair/0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc) in the past month. Because the capital utilization rate of PMM algorithm is very high, the capital utilization rate can reach ten times that of Uniswap. So the actual turnover rate is also much higher than Uniswap.
+我们计算了 Uniswap 一个月的历史数据。因为 PMM 算法资金利用率很高达到 Uniswap 的十倍以上，所以实际换手率也会高很多。
 
-2. Why do you use BTC price for backtesting?
+2. 为什么使用 BTC 价格做回测研究？
 
-   Because we did not find ETH price data of high-precision. We would be very grateful if someone could provide ETH price historical data with 1min interval or more frequent. But it is reasonable to use BTC price to estimate loss, because ETH and BTC prices are highly correlated.
+我们没有找到高精度的 ETH 价格数据，非常欢迎大家能向我们提供 1 分钟间隔的 ETH 历史价格数据。使用 BTC 历史价格进行回测估算损失是合理的，因为 ETH 和 BTC 价格高度相关。
 
-3. How does the arbitrage work?
+3. 套利是怎么实现的？
 
-   The arbitrage is carried out when arbitrageurs notice that the price provided by the PMM is more beneficial to them than the market price, i.e. the difference between the PMM and the market price is less than its comprehensive arbitrage cost (PMM Fee + Arbitrage Cost)
+当套利者注意到 PMM 提供的价格跟市价相比有搬砖空间时，比如 PMM 和市价的差距大于搬砖的综合成本（PMM 手续费+搬砖成本）
 
-4. Given that Chainlink's BTC Oracle accuracy rate is 1%, why is it set to 0.5% here?
+4. Chainlink 的 BTC 报价精度是 1%，这里为什么设置为 0.5%？
 
-   First of all, Chainlink will increase the accuracy rate of BTC Oracle to 0.5% soon. Secondly, PMM will focus on ETH trading pair for now. And the accuracy rate of Chainlink’s ETH Oracle is 0.5%.
+Chainlink 很快将会把 BTC 价格的精度提升到 0.5%；另外，PMM 算法现在主要应用在 ETH 相关的交易对，而 Chainlink 的 ETH 价格精度是 0.5%。
 
-5. Does the size of the funding pool have an impact on the backtest?
+5. 资金池的规模对于回测有影响么？
 
-   Yes, it does. ROI will not be so good if the pool size is too small. We need enough liquidity to compete with other liquidity sources. Actually, the 1/10 of Uniswap pool size required for backtesting is able to produce competitive liquidity, which equals only \$900,000.
+肯定有影响。如果资金池规模太小，回报率不会太高的。我们需要充足的流动性与其他的项目竞争。事实上，回测是需要用 Uniswap 十分之一的资金池规模（约 90 万美金）就可以产生有竞争力的流动性。
 
-6. How about the gas cost
+6. gas 消耗是怎样的？
 
-   Swap between two standard ERC20 token cost 145,000 ~ 175,000 gas. The gas cost is slightly higher than uniswap(~100,000 gas), but significantly lower than other protocols. For example, kyber costs ~400,000gas; balancer costs ~300,000 gas; dydx costs ~400,000 gas;
+两个 ERC20 标准的代币进行交换，需要 145000~175000 gas。gas 会比 Uniswap （约 100000）略高，但是远低于其他协议。
+
+比如像 Kyber，需要大约 400000 gas；Balancer 需要 300000 gas；dYdX 需要 400000 gas。
