@@ -20,7 +20,7 @@ module.exports = {
   ],
   themeConfig: {
     navbar: {
-      title: "DODO Docs",
+      title: "DODO 文档中文",
       logo: {
         alt: "DODO",
         src: "img/logo.svg",
@@ -30,17 +30,22 @@ module.exports = {
         {
           to: "docs/",
           activeBasePath: "docs",
-          label: "Docs",
+          label: "文档",
           position: "left",
         },
         {
           href: "https://app.dodoex.io",
-          label: "Exchange",
+          label: "交易所",
           position: "left",
         },
         {
           href: "https://github.com/DODOEX",
           label: "GitHub",
+          position: "left",
+        },
+        {
+          href: "https://DODOEX.github.io/docs/",
+          label: "EN",
           position: "left",
         },
       ],
