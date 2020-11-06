@@ -1,58 +1,58 @@
 ---
 id: advantages
-title: The DODO Advantage
-sidebar_label: The DODO Advantage
+title: DODO 的优势
+sidebar_label: DODO 的优势
 ---
 
-## Overview
+## 概览
 
-DODO is powered by a ground-breaking algorithm called **Proactive Market Maker (PMM)**. PMM leverages price oracles to retrieve accurate market prices of assets as input. It then aims to provide sufficient liquidity near the market price for every asset. The result is that liquidity decreases rapidly when far away from the market price. The following graphs compare the price curves of DODO (PMM) and Uniswap (AMM).
+DODO 是基于原创的**主动做市商算法（PMM）**的流动性解决方案。主动做市商算法通过引入预言机来指导价格，将资金聚集在市价附近，提供充足的流动性。在远离市价的位置，流动性迅速下降。下图对比了 DODO (PMM) 和 Uniswap (AMM) 的价格曲线。
 
-With everything else fixed, it is clear that the PMM curve is significantly flatter than the AMM curve near the market price, indicating higher fund utilization and lower slippage. Prices provided by PMM are more favorable than AMM.
+很明显，PMM 曲线在市场价格附近比 AMM 曲线更平坦，这意味着 PMM 拥有较高的资金利用率和较低的滑点。 同时 PMM 提供的价格更优惠。
 
 ![](https://dodoex.github.io/docs/img/dodo_curve.jpeg)
 
-As the market price changes, AMM passively relies on arbitrage trading to change prices. On the other hand, PMM proactively shifts the price curve in the same direction to ensure that the section in the vicinity of the market price remains flat. This ensures the constant provision of sufficient liquidity.
+当市场价格变化时，AMM 被动地依赖套利交易来改变价格。PMM 不会被动地等待套利者交易，而是主动改变价格曲线的位置，使得价格曲线始终在市场价附近保持平滑，即提供充足的流动性。
 
 ![](https://dodoex.github.io/docs/img/dodo_curve_move.jpeg)
 
-PMM outperforms AMM solutions in several important aspects.
+PMM 在以下几个重要的方面都优于 AMM：
 
-## High Fund Utilization
+## 资金利用率高
 
-As seen in the above graphs, PMM, like AMMs, provides liquidity in the price range of zero to positive infinity, but the PMM price curve is significantly flatter in the area near the oracle (market) price. That is, most of the funds are gathered near the market price, which allows for more active, frequent trading, increasing fund utilization.
+从上图中可以看出，PMM 跟 AMM 一样，都是在零到正无穷大的价格范围内提供流动性，但是 PMM 价格曲线在预言机价格（市价）附近的区域明显更平坦。也就是说，PMM 将大多数资金聚集在市价附近，可以满足更加活跃和频繁的交易，从而提高了资金利用率。
 
-## Single Risk Exposure
+## 单一风险敞口
 
-In the price curves above, each price curve consists of two parts: the bidding side to the left and the asking side to the right. These two parts may have different depth, or liquidity, resulting in what is known as the [bid-ask spread](https://en.wikipedia.org/wiki/Bid%E2%80%93ask_spread).
+在上面的价格曲线中，每条价格曲线都包含两个部分：左侧的出价方和右侧的要价方。这两个部分可能具有不同的深度或流动性，导致所谓的[买入/卖出价差](https://en.wikipedia.org/wiki/Bid%E2%80%93ask_spread)。
 
 ![](https://dodoex.github.io/docs/img/dodo_segment.jpeg)
 
-In PMM, the asking liquidity is solely determined by the amount of base token in the pool, and the bidding liquidity is solely determined by the amount of quote tokens in the pool. It allows the base and quote pools to have different sizes, and thus allows liquidity providers to deposit any amount of either quote or base tokens, rather than both (like Uniswap). DODO Liquidity providers deposit what they already have, nothing more.
+在 PMM 算法中，要价流动性仅有资产池中的 base token 决定，而出价流动性仅由资产池中的 quote token 决定。PMM 算法允许 base token 和 quote token 资产不一致，也就是说允许流动性提供商存入任意数量的 base token 和 quote token。DODO 的流动性提供商只要存入他们已有的资产就够了。
 
-:::note
+:::注意
 
-The design is intuitive, because when you take an asking order, you take liquidity providers’ base tokens and the quote tokens are irrelevant.
+这样的机制非常简洁，当你想要与要价单成交时，你会使用流动性提供商的 base token ，与 quote token 无关。
 
 :::
 
-## No Impermanent Loss
+## 没有无常损失
 
-But what about impermanent loss, i.e. how does PMM ensure that liquidity providers get what they deposited when they withdraw their tokens? The answer is by encouraging arbitrage trading. When individual traders buy base tokens, PMM slightly increases the price to make it more profitable for arbitrageurs to sell base tokens. In PMM, arbitrage trading makes sure that the number of tokens in the pool is always roughly equal to the number of tokens deposited by liquidity providers. This scheme effectively mitigates impermanent loss for liquidity providers, making liquidity provision on DODO a low-risk affair.
+PMM 避免无偿损失的关键是保证流动性提供商的仓位稳定，不会随着价格的变化而变化。那么PMM 算法怎么保证流动性提供商的仓位稳定呢？答案是：鼓励套利交易。当个体交易者购买 base token 时，PMM 会略微提高价格，让套利者有利可图。搬砖套利可以保证资产池中资产不会发生大幅波动，这样的机制可以有效降低流动性提供商的无常损失。
 
-## Next Generation of Liquidity Provision
+## 新一代流动性解决方案
 
-Liquidity is the most important resource in the DeFi world, because it is the foundational element in all DeFi projects. There are two major proven approaches to decentralized liquidity provision today:
+流动性是 DeFi 世界里最重要的资源，因为它是所有 DeFi 项目的根本。目前，市面上有两种去中心化流动性方案：
 
-- Algorithmic market makers (e.g. Uniswap)
-- Orderbook-based order matching (e.g. dYdX)
+- 算法做市（如 Uniswap） 
+- 基于订单簿的撮合（如 dYdX） 
 
-However, they are both flawed.
+以上两种方案都有一些缺陷：
 
-- Compared to centralized exchanges, algorithmic market makers cannot provide sufficient liquidity for mainstream assets. In addition, for niche, long-tail assets, AMM can only provide very basic liquidity support
-- Orderbook-based order matching relies on human market makers to mirroring centralized exchanges liquidity. Effective market makers are expensive, and very few DEX teams can afford them. In addition, this kind of liquidity is difficult to be filled by smart contracts due to the human elements involved, significantly limiting the number of use cases for DeFi practitioners
+- 与中心化交易所相比，AMM 无法为主流资产提供充足的流动性。另外，对于长尾市场，AMM 只能提供基本的流动性支持。
+- 订单簿撮合方案依赖做市商从中心化交易所搬运流动性。专业高效的做市商提供的服务都很昂贵，只有极少数的去中心化交易所能够用得起。此外，人为因素参与使得智能合约很难直接使用流动性，链下订单簿的流动性丧失了可组合性，从而限制了 DeFi 玩家的使用场景。
 
-PMM is also an algorithmic market maker algorithm, but it fundamentally differs from other approaches by mitigating and eliminating their disadvantages and amplifying their advantages. PMM provides sufficient and contract-fillable liquidity on-chain for all assets, empowering DeFi users to take advantage of composability.
+PMM 也是算法做市的流动性方案，与其他方案相比，做到了扬长避短。PMM 可以为所有的资产提供充足、便宜的链上流动性，让 DeFi 玩家可以有更多的组合玩法。
 
 <!-- # DODO的优势是什么
 
