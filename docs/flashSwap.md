@@ -1,29 +1,29 @@
 ---
 id: flashSwap
-title: Flash Swap
-sidebar_label: Flash Swap
+title: 闪电交换
+sidebar_label: 闪电交换
 ---
 
-## What is Flash Swap
+## 什么是闪电交换？
 
-Simply put, you are allowed to pay on credit on DODO! When you buy tokens DODO, you can first get the tokens you want to buy, do anything you want with the tokens, and pay for them later.
+简而言之，就是你可以在 DODO 上凭借信用进行支付。当你购买代币时，你可以先拿到代币，然后再付钱。
 
-## How Does Flash Swap Work
+## 闪电交换机制
 
 ![](https://dodoex.github.io/docs/img/dodo_flash_swap.jpeg)
 
-The figure above illustrates the four steps in a flash swap happening under the hood
+上图说明了闪电交换的四个步骤：
 
-1.  Call the `buyBaseToken` function from the `DODO Pair` smart contract
-2.  `DODO Pair` transfers the base tokens to the message sender
-3.  If the parameter `data` of the `buyBaseToken` function call is not null, the `DODO Pair` smart contract will call the `dodoCall` method of the message sender
-4.  After the `dodoCall` is executed, the `DODO Pair` smart contract will retrieve the quote tokens required for this transaction from the message sender
+1.  调用 `DODO Pair` 合约中的 `buyBaseToken` 函数
+2.  `DODO Pair` 将 base token 发送给申请者
+3.  如果 `buyBaseToken` 函数调用的参数`data`数据不为空，则 `DODO Pair` 智能合约将调用申请者的 `dodoCall` 方法
+4.  `dodoCall` 执行后，`DODO Pair` 智能合约将从申请者那里检索所需的 quotetoken
 
-:::note
-The `sellBaseToken` function can also perform flash swap in the same way.
+:::注意
+`sellBaseToken`  函数还可以以相同方式执行闪电交换。
 :::
 
-Flash swap requires the message sender to be a contract that implements the `IDODOCallee` interface.
+闪电交换要求申请者是可以实现 `IDODOCallee` 接口的合约。
 
 ```javascript
 interface IDODOCallee {
@@ -36,42 +36,40 @@ interface IDODOCallee {
 }
 ```
 
-## What Can Flash Swap Do
+## 闪电交换可以做什么？
 
-Flash swap can significantly improve market efficiency. Market parity is maintained by arbitrageurs, and flash swap completely removes capital requirements for them, essentially eliminating the barrier of entry to arbitrage trading. 
+闪电交换可以提高做市的效率。市场平家由套利者来维持，闪电交换可以搬砖不再有资金要求，降低了搬砖套利的门槛。
 
-We will demonstrate a completely trustless and risk-free arbitrage trading contract as a use case of flash swap. Please refer to the `UniswapArbitrageur.sol` [source code](https://github.com/DODOEX/dodo-smart-contract/blob/master/contracts/helper/UniswapArbitrageur.sol) for a concrete example. It has already been deployed and you can check out its Etherscan link [here](https://etherscan.io/address/0xbf90b54cc00ceeaa93db1f6a54a01e3fe9ed4422)
-
-The following figure illustrates how an arbitrageur might take advantage of the price discrepancies between DODO and Uniswap.
+我们来演示一个完全无风险的套利交易组合作为闪电交换的应用示例。请参考 `UniswapArbitrageur.sol` 的[源代码](https://github.com/DODOEX/dodo-smart-contract/blob/master/contracts/helper/UniswapArbitrageur.sol) 作为示例，[点击查看](https://etherscan.io/address/0xbf90b54cc00ceeaa93db1f6a54a01e3fe9ed4422)。套利演示：
 
 ![](https://dodoex.github.io/docs/img/dodo_one_click_arbitrage.jpeg)
 
-A complete arbitrage trading maneuver consists of the following 9 steps:
+完整套利交易包括 9 个步骤：
 
-1.  The user calls `executeBuyArbitrage` on `UniswapArbitrageur`
-2.  `UniswapArbitrageur` calls `buyBaseToken` on `DODO Pair` and triggers flash swap
-3.  `DODO Pair` transfers 1 WETH to `UniswapArbitrageur`
-4.  `DODO Pair` calls `dodoCall` on `UniswapArbitrageur`
-5.  `UniswapArbitrageur` transfers 1 WETH received from `DODO Pair` to `UniswapV2`
-6.  `UniswapArbitrageur` calls `swap` on `UniswapV2`
-7.  `UniswapV2` transfers 200 USDC to `UniswapArbitrageur`
-8.  `DODO Pair` calls `transferFrom` and retrieves 150 USDC from `UniswapArbitrageur`
-9.  `UniswapArbitrageur` transfers the remaining 50 USDC to the user
+1.  用户调用 `UniswapArbitrageur` 的  `executeBuyArbitrage` 函数
+2.  `UniswapArbitrageur` 调用 `DODO Pair` 的 `buyBaseToken` 函数，触发闪电交换
+3.  `DODO Pair` 向 `UniswapArbitrageur` 转 1 WETH
+4.  `DODO Pair` 调用 `UniswapArbitrageur` 的 `dodoCall` 函数
+5.  `UniswapArbitrageur` 将收到的 1 WETH 转给 `UniswapV2`
+6.  `UniswapArbitrageur`  调用 `UniswapV2` 的 `swap` 函数
+7.  `UniswapV2` 向 `UniswapArbitrageur` 转 200 USDC
+8.  `DODO Pair` 调用 `transferFrom` 函数从 `UniswapArbitrageur` 接受 150 USDC
+9.  `UniswapArbitrageur` 把剩下的 50 USDC 转给用户
 
-In summary,
+综上
 
-- Steps 2, 3, 4, and 8 take care of the DODO front
-- Steps 5, 6, and 7 take care of the Uniswap front
-- The user is only exposed to the process of sending transactions and making profits, with everything else abstracted away!
+- 第 2，3，4，8 步由 DODO 运行 
+- 第 5，6，7 步由 Uniswap 运行 
+- 用户只要发起交易就可以套利，完全不用参与其他步骤。 
 
-The best part about the `UniswapArbitrageur` contract is that users do not need any capital, nor do they need to know how DODO and Uniswap work. They would simply call a function and, if the execution succeeds, make a profit. If the execution fails, the users would only lose some gas.
+`UniswapArbitrageur` 合约中最棒的地方自于用户不需要任何资金，也不需要知道 DODO 和 Uniswap 的工作机制。他们只需要调用一个函数，成功后即可获利；即使失败，用户也只会损失一些 gas 费。
 
-In order to avoid unnecessary gas consumption, we recommend that users use `eth_call` to execute `executeBuyArbitrage` or `executeSellArbitrage` in advance to estimate arbitrage returns. If there is an arbitrage opportunity, these two functions will return profit of quote tokens and base tokens after successful execution.
+为了避免不必要的 gas 损耗，我们建议用户使用 `eth_call` 提前执行 `executeBuyArbitrage`  或 `executeSellArbitrage` 来估算套利收益。如果有套利机会，这两个函数会返回搬砖成功的收益。
 
-## Some Thoughts on Flash Swap
+## 一些想法
 
-Once you have a deep understanding of flash swap, you will realize the superiority of the DeFi world over the centralized world. The composability of smart contracts has elevated the fund utilization of DeFi to an unprecedented level. Thanks to trustlessness, the cost of credit in DeFi is incredibly low. Once this financial system is integrated into the real world, its potential for improving our society and productivity will be truly boundless. The DODO team hopes that flash swap serves as a primer for DeFi builders and beginners alike to gain an appreciation for the power of DeFi.
+一旦你深入了解了闪电交换，你就会明白 DeFi 世界相比于中心化世界的优势。通过组合智能合约，我们可以将 DeFi 的资金利用率提高到前所未有的水平。DeFi 世界中的信任成本极低。一旦这个金融系统应用落地，它将极大地提升社会生产力。DODO 团队希望可以让 DeFi 从业者的通过了解闪电交换来入门 DeFi 世界。
 
-:::note
-Flash swap was inspired by [dYdX](https://dydx.exchange/) and [Uniswap](https://uniswap.org/docs/v2/core-concepts/flash-swaps). The DODO team genuinely appriciates and admires what these DeFi pioneers have done before us 👍
+:::注意
+闪电交换是受  [dYdX](https://dydx.exchange/) 和 [Uniswap](https://uniswap.org/docs/v2/core-concepts/flash-swaps). 启发而诞生的，DODO 团队向这些 DeFi 世界的先驱者表示致敬。 👍
 :::
