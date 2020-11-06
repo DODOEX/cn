@@ -1,42 +1,42 @@
 ---
 id: authority
-title: Authority
-sidebar_label: Authority
+title: 管理权
+sidebar_label: 管理权
 ---
 
-There are two special roles in each `DODO Pair` smart contract: `admin` and `supervisor`.
+每个  `DODO Pair`  智能合约有两个特殊角色：管理员 `admin` 和监督员 `supervisor`。
 
-Here I would like to introduce the scope of power of `admin` and `supervisor`, and the principles of design behind.
+下面会介绍管理员 `admin` 和监督员 `supervisor` 的管理权限和背后的设计原理。
 
-:::note
-You may be very concerned about who is the `admin` and the `supervisor`, and will they abuse the power. Please don't worry, in the [next section](./decentralization), we will introduce the decentralized governance process in detail.
+:::注意
+你可能很关心谁是管理员 `admin` 和监督员 `supervisor` ，他们会不会滥用权力。不用担心，我们会在[下一节](./decentralization)中详细地介绍去中心化治理的细节。
 :::
 
-## Scope
+## 权限
 
-Power of the supervisor is a subset of that of `admin`, and both `supervisor` and `admin` have A-level authority. Level A permissions include:
+监督员的管理权限是管理员权限的子集，不论是监督员还是管理员都有 A 级权限，包括：
 
-- Disable trade
-- Disable deposit
-- Set gas price limit
+- 禁止交易 
+- 禁止充值 
+- 设置 gas limit 
 
-`admin` is the only one with B-level authority, which includes:
+只有管理员 `admin` 拥有 B 级权限，包括：
 
-- Change admin
-- Change supervisor
-- Change maintainer
-- Change oracle
-- Set liquidity provider fee rate
-- Set maintainer fee rate
-- Set K
-- Enable trade
-- Enable deposit
-- Final settlement
+- 增减管理员 
+- 增减监督员 
+- 增减维护者 
+- 改变预言机 
+- 设置做市商的费率 
+- 设置维护者费率 
+- 设置参数 K 
+- 开启交易 
+- 开启充值 
+- 最终结算 
 
-## Principle
+## 原理
 
-Level-A authority can be summarized as "freeze status" i.e. some functions of the system can be stopped urgently, but the status cannot be changed. In order to limit the power of `admin`, often actions taken by `admin` have to go through a complex governance process. To be risk resistant, we need a more flexible `supervisor` instead of an `admin` to take some actions that are not so sensitive but can significantly reduce system risks.
+A 级管理权限可以概况为“冻结状态”，即可以紧急停止系统的某些功能，但不能更改状态。为了限制管理员 `admin` 的权力，管理员 `admin` 的操作需要通过复杂的治理流程。为了规避风险，我们需要一个监督员 `supervisor`代替管理员 `admin` 来执行一些不太敏感但是可以大大降低系统风险的操作。
 
-The B-level authority basically covers all aspects of the `DODO Pair` contract. The reason why so many parameters are designed to be variable is to better adapt to the rapidly changing market environment. It also leaves room for governance in the future.
+B 级管理权限覆盖了 `DODO Pair` 智能合约的方方面面。之所以设计这么多可调的参数，是为了更好地时应市场变化，并为未来的治理留下了空间。
 
-It is worth pointing out that no one can prohibit users from withdrawing coins. Being non-custodial is the most important principle of Defi.
+值得说明的是，没有人能禁止用户提币。不保管资产是 DeFi 最重要的原则。
