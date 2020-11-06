@@ -1,12 +1,12 @@
 ---
 id: deployedInfo
-title: Deployment Information
-sidebar_label: Deployment Information
+title: 开发者信息
+sidebar_label: 开发者信息
 ---
 
-## DODO Token
+## DODO 代币相关
 
-| Contract Name             | Address                                                                                                               |
+| 合约                      | 地址                                                                                                                  |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | DODO Token                | [0x43dfc4159d86f3a37a5a4b3d4580b888ad7d4ddd](https://etherscan.io/address/0x43dfc4159d86f3a37a5a4b3d4580b888ad7d4ddd) |
 | DODO Pair: DODO-USDT      | [0x8876819535b48b551c9e97ebc07332c7482b4b2d](https://etherscan.io/address/0x8876819535b48b551c9e97ebc07332c7482b4b2d) |
@@ -17,9 +17,9 @@ sidebar_label: Deployment Information
 | Locked Token Vault 2      | [0xde25cebdd50ff2af17bbc8b3cbf2e31c48b769b4](https://etherscan.io/address/0xde25cebdd50ff2af17bbc8b3cbf2e31c48b769b4) |
 | Undistributed Token Vault | [0x3e19d726ed435AfD3A42967551426b3A47c0F5b7](https://etherscan.io/address/0x3e19d726ed435AfD3A42967551426b3A47c0F5b7) |
 
-## Mainnet
+## 主网
 
-| Contract Name                  | Address                                                                                                               |
+| 合约                           | 地址                                                                                                                  |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
 | DODO Pair: WETH-USDC           | [0x75c23271661d9d143dcb617222bc4bec783eff34](https://etherscan.io/address/0x75c23271661d9d143dcb617222bc4bec783eff34) |
 | DODO Pair: LINK-USDC           | [0x562c0b218cc9ba06d9eb42f3aef54c54cc5a4650](https://etherscan.io/address/0x562c0b218cc9ba06d9eb42f3aef54c54cc5a4650) |
@@ -38,9 +38,9 @@ sidebar_label: Deployment Information
 | Multisig Wallet with Time Lock | [0x6dae6ae227438378c117821c51fd61661faa8893](https://etherscan.io/address/0x6dae6ae227438378c117821c51fd61661faa8893) |
 | Gnosis Multisig Wallet         | [0x95C4F5b83aA70810D4f142d58e5F7242Bd891CB0](https://etherscan.io/address/0x95C4F5b83aA70810D4f142d58e5F7242Bd891CB0) |
 
-## DLP Token Address
+## DLP 代币地址
 
-| DLP              | Address                                                                                                               |
+| DLP              | 地址                                                                                                                  |
 | ---------------- | --------------------------------------------------------------------------------------------------------------------- |
 | WETH-USDC : WETH | [0xc11eCCDee225d644f873776A68A02eCD8c015697](https://etherscan.io/address/0xc11eCCDee225d644f873776A68A02eCD8c015697) |
 | WETH-USDC : USDC | [0x6a5Eb3555cBbD29016Ba6F6fFbCcEE28D57b2932](https://etherscan.io/address/0x6a5Eb3555cBbD29016Ba6F6fFbCcEE28D57b2932) |
@@ -59,9 +59,9 @@ sidebar_label: Deployment Information
 | USDT-USDC: USDT  | [0xE2852C572FC42C9e2ec03197deFa42c647e89291](https://etherscan.io/address/0xE2852C572FC42C9e2ec03197deFa42c647e89291) |
 | USDT-USDC: USDC  | [0xD9D0bd18DDfA753d0c88a060fFb60657bB0D7A07](https://etherscan.io/address/0xD9D0bd18DDfA753d0c88a060fFb60657bB0D7A07) |
 
-## Related Token Address
+## 相关代币地址
 
-| Symbol         | Address                                                                                                               |
+| Symbol         | 地址                                                                                                                  |
 | -------------- | --------------------------------------------------------------------------------------------------------------------- |
 | WETH           | [0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2](https://etherscan.io/address/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) |
 | USDT           | [0xdac17f958d2ee523a2206206994597c13d831ec7](https://etherscan.io/address/0xdac17f958d2ee523a2206206994597c13d831ec7) |
@@ -75,9 +75,9 @@ sidebar_label: Deployment Information
 | FIN            | [0x054f76beed60ab6dbeb23502178c52d6c5debe40](https://etherscan.io/address/0x054f76beed60ab6dbeb23502178c52d6c5debe40) |
 | WOO            | [0x4691937a7508860f876c9c0a2a617e7d9e945d4b](https://etherscan.io/address/0x4691937a7508860f876c9c0a2a617e7d9e945d4b) |
 
-## Kovan
+## Kovan 测试网
 
-| Contract Name         | Address                                    |
+| 合约                  | 地址                                       |
 | --------------------- | ------------------------------------------ |
 | DODO Pair: BASE-QUOTE | 0x3c5ab3757de3dffbdb179800c26be7705592a816 |
 | Test Base Token       | 0x215bd4d983c571a840b89028cc005b6ff0734ebe |
@@ -93,7 +93,7 @@ sidebar_label: Deployment Information
 | Test Uniswap          | 0x125efdccfbb9e81d53095f2f2e8edae2c4c49369 |
 | Uniswap arbitrageur   | 0x5b3f89afe4321b8914213dd44df35062d9dffaf6 |
 
-To play with DODO on [Kovan](https://kovan-testnet.github.io/website/), you can:
+如果你要在 [Kovan](https://kovan-testnet.github.io/website/) 测试网使用 DODO，可以
 
-- Request test tokens by emailing contact@dodoex.io
-- Get free Kovan ETH from the Kovan [faucet](https://github.com/kovan-testnet/faucet)
+- 向 contact@dodoex.io 申请 DODO 测试币
+- 从 Kovan [faucet](https://github.com/kovan-testnet/faucet) 申请测试 ETH
