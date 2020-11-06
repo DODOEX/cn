@@ -1,41 +1,41 @@
 ---
 id: decentralization
-title: Decentralization
-sidebar_label: Decentralization
+title: 去中心化治理
+sidebar_label: 去中心化治理
 ---
 
-In our vision, DODO will be fully governed by the community, and controlled by three DAOs
+我们的愿景是 DODO 完全交给社区，由三个 DAO 参与治理。
 
-### Admin DAO
+### 管理 DAO
 
-Act as an administrator, the ultimate mediator of all issues.
+作为管理员，调解所有问题。
 
-### Risk Control DAO
+### 风险控制 DAO
 
-Act as a supervisor and deal with all risk events urgently.
+作为监督员，紧急处理风险事件。
 
-### Earn DAO
+### 财务 DAO
 
-To distribute revenue of maintainer.
+分配社区的收益。
 
-## Process
+## 治理流程
 
-When DODO was launched, all authorities were governed by the team. As the community learns more about DODO, we will gradually return all the rights to the community. Although there is no timeline for this process yet, we do intend to follow the process.
+在 DODO 启动时候，所有的治理角色由团队担当。随着社区对于 DODO 了解的深入，我们将逐步将治理权归还给社区。具体执行计划如下：
 
 |     | Step                                                 | Finished |
 | --- | ---------------------------------------------------- | -------- |
-| 1   | Set Admin to multi\-sig wallet with daily limit      | ✔️       |
-| 2   | Deploy DODOWild: Allows anyone create their own DODO |          |
-| 3   | Issue governance token                               |          |
-| 4   | Set Maintainer to Earn DAO                           |          |
-| 5   | Set Admin to Admin DAO                               |          |
-| 6   | Set Supervisor to Risk Control DAO                   |          |
+| 1   | 将管理员设置为每日限额的多签名钱包                    | ✔️       |
+| 2   | 部署 DODOWild：允许任何人创建自己的 DODO              |          |
+| 3   | 发行治理代币                                         |          |
+| 4   | 将维护者设置为财务 DAO                               |          |
+| 5   | 将管理员设置为管理 DAO                               |          |
+| 6   | 将监管设置为风险控制 DAO                             |          |
 
-What is the purpose of each step?
+每个步骤的目的是？
 
-1.  All admin actions come with a public announcement period to avoid single point failure
-2.  Anyone can create a new `DODO Pair` and use it to provide liquidity to their tokens. This marks the return of the code to the community
-3.  Issue governance tokens and formulate a token distribution plan, which will initiate the step down process
-4.  Hand over the profit distribution responsibility to Earn DAO
-5.  After handing admin authority over to the DAO, the team has no real control rights, and only reserves the right to control risk
-6.  The team steps down completely, marking the last step towards complete decentralization
+1.  所有的治理行为都有公示期来避免单点故障
+2.  任何人都可以创建 DODO Pair，并用用它来提供流动性。这一步标志着代码交给了社区治理
+3.  发行治理代币并制定代币分配计划，这一步将开启团队退出治理的流程
+4.  将收益分配的责任交给财务 DAO
+5.  讲管理员权限交出后，项目团队不再拥有实际控制权，只保留控制风险的权力。
+6.  项目团队彻底退出治理，这意味着完全的去中心化治理
