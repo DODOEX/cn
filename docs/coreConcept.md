@@ -1,103 +1,95 @@
 ---
 id: coreConcept
-title: Core Concepts
-sidebar_label: Core Concepts
+title: 关键概念
+sidebar_label: 关键概念
 ---
 
-## Base & Quote Tokens
+## Base Token 和 Quote Token
 
-`Base` and `quote` are two concepts that will be mentioned frequently. Two easy ways to distinguish between them are:
+`Base` 和 `quote` 是两个被反复提到的概念，有两个方法可以区分他们：
 
-- In a trading pair, the `base` is always the token before the hyphen, and `quote` after
-- In transactions, price refers to how many `quote` tokens are needed in exchange for one `base` token
+- 在交易对中，base 是连字符前边的代币，quote 是后边的。
+- 在交易中，价格往往是表示多少个 quote token 可以买 1 个 base token 。
 
-For example, in the ETH-USDC trading pair, ETH is the `base` token and USDC is the `quote` token
+比如，在 ETH - USDC 交易对中， ETH 是base token , quote token。
 
-## PMM Parameters
+## PMM 参数
 
-The funding pool of PMM is described by four parameters:
+PMM 算法中有 4 个参数：
 
-- $B_0$: base token regression target - total number of base tokens deposited by liquidity providers
-- $Q_0$: quote token regression target - total number of quote tokens deposited by liquidity providers
-- $B$: base token balance - number of base tokens currently in the pool
-- $Q$: quote token balance - number of quote tokens currently in the pool
+- $B_0$: base token 回归目标值 - 做市商总充值
+- $Q_0$: quote token 回归目标值 - 做市商总充值
+- $B$: base token 资产 - 当前资产池 base token 中的数量
+- $Q$: quote token 资产 - 当前资产池中 quote token 中的数量
 
-## PMM Pricing Formula
+## PMM 定价公式
 
-The PMM price curve is plotted by the following pricing formula:
+PMM 的价格曲线对应的公式为:
 
 $$P_{margin}=iR$$
 
-Where $R$ is defined to be the piecewise function below:
+$R$ 是由以下公式确定:
 
-$$if \ B<B_0, \ R=1-k+(\frac{B_0}{B})^2k$$
+$$如果 \ B<B_0, \则 R=1-k+(\frac{B_0}{B})^2k$$
 
-$$if \ Q<Q_0, \ R=1/(1-k+(\frac{Q_0}{Q})^2k)$$
+$$如果 \ Q<Q_0, \则 R=1/(1-k+(\frac{Q_0}{Q})^2k)$$
 
-$$else \ R=1$$,
+$$其他情况 \ R=1$$,
 
-$$i$$ is the market price provided by an oracle, and $$k$$ is a parameter in the range (0, 1).
+$$i$$ 是由预言机提供的市价， $$k$$ 是一个在 0 到 1 范围内的参数。
 
-## The Three Possible States in PMM
+## PMM 算法中的三种状态
 
-At any given time, PMM is in one of three possible states: equilibrium, base token shortage, and quote token shortage.
+在任意时间， PMM 算法不外乎三种状态，base token 和 quote token 一样；base token 短缺；quote token 短缺。
 
 ![](https://dodoex.github.io/docs/img/dodo_mode_switch.jpeg)
 
-Initially, i.e. prior to any transaction, the capital pool is in equilibrium, and both base tokens and quote token are at their regression targets. That is, $B=B_0$ and $Q=Q_0$.
+在最初没有任何交易的时候，资产池处于平衡的状态。base token 和 quote token 位于回归目标。即 $B=B_0$ and $Q=Q_0$.
 
-When a trader sells base tokens, the base token balance of the capital pool is higher than the base token regression target; conversely, the quote token balance is now lower than the quote token regression target. In this state, PMM will try to sell the excess base tokens, lowering the base token balance and increasing the quote token balance, in order to move this state back to the state of equilibrium.
+当交易者售出 base token 时，base token 资产池的余额高于回归目标；相反 quote token资产池余额低于回归目标；在这种情况下，PMM 将会尝试出售多出的 base token ，让资产池回归到平衡状态。
 
-When a trader buys base tokens, the quote token balance of the capital pool is higher than the quote token regression target; conversely, the base token balance is now lower than the base token regression target. In this state, PMM will try to sell the excess quote tokens, lowering the quote token balance and increasing the base token balance, in order to move this state back to the state of equilibrium.
+同理，当交易者购入 base token 时，quote token 资产池中的余额会高于回归目标；base token 余额低于回归目标。PMM 将会尝试出售多出的 quote token，让资产池回归平衡状态。
 
-The parameter $R$ in the pricing formula above assumes a critical role in facilitating this regression process. The more the capital pool deviates from the equilibrium state, the more $R$ deviates from `1`. When the price given by the PMM algorithm deviates from the market price, arbitrageurs step in to help bring the capital pool back to the equilibrium state.
+参数 $R$ 会在回归过程起到非常关键的作用。资产池越偏离平衡状态，$R$ 就越偏离`1`。当 PMM 给出的价格与市价存在差价时，套利者就可以来搬砖帮助资产池回到平衡状态。
 
-## Liquidity Provider Fee
+## 流动性付费
 
-A small amount of transaction fee will be charged on every trade. This fee is called the liquidity provider fee and will be distributed to every liquidity provider based on their proportional stake in the capital pool.
+每笔交易将会被收取少量的手续费，这笔手续费就是流动性付费，会按照资产比例分给做市商。
 
-More specifically, liquidity provider fees are collected from what buyers received and distributed to liquidity providers who supplied this kind of asset to the capital pool. In other words, liquidity providers are rewarded in the same asset denomination. 
+换句话来说，交易者交手续费，做市商参与分成。举个例子，在 ETH - USDC 交易市场，用户买入 ETH，需要交少量 ETH 作为手续费，这部分 ETH 将会分给做市商。当用户卖出 ETH 时，需要交少量 USDC 作为手续费，这部分 USDC 将会被分给做市商。
 
-For example, when traders buy ETH tokens with USDC tokens, liquidity provider fees will be charged in the form of ETH tokens, and distributed to liquidity providers who deposited ETH tokens into the capital pool.
-
-When traders sell ETH tokens for USDC tokens, liquidity provider fees will be charged in the form of USDC tokens, and distributed to liquidity providers who deposited USDC tokens into the capital pool.
-
-:::note
-Base and quote tokens have different returns on investments (ROI) in PMM's funding pool.
+:::注意
+在资产池中，base token 和 quote token 收益率是不同的。
 :::
 
-## Maintainer fee
+## 运营手续费
 
-A maintainer fee is also collected from what buyers received, and will be directly transferred to the maintainer. The maintainer may be a development team, a foundation, or a staking decentralized autonomous organization (DAO).
+运营手续费同样是由交易者缴纳，分给运营者，有可能是开发团队，创始团队，DAO。
 
-Currently, the maintenance fee on DODO is 0.
+目前，DODO 不收取运营手续费。
 
-## Withdrawal Fee
+## 提现手续费
 
-A withdrawal will change the PMM price curve and may harm the interests of other liquidity providers. DODO charges a withdrawal fee from liquidity providers who withdraw their assets and distribute it to all remaining liquidity providers.
+从资产池中提取资金，将会影响其他做市商的收益。DODO 将会对提取资金收取手续费，并分给剩余做市商。
 
-:::important
+:::重要
 
-Normally, the withdrawal fee is 0 or an extremely small percentage (<0.01%) of what you withdraw. The withdrawal fee will increase significantly only if the funding pool suffers from a serious shortage of either base or quote tokens and liquidity providers intend to withdraw the type of token in shortage.
-
-The withdrawal fee serves as a protection mechanism for liquidity providers who maintain their supplies of liquidity and contribute to the sustainability and overall health of the DODO platform.
+通常提取手续费为 0 或者小于 0.01%；仅当某种资产严重短缺，做市商尝试提取该种资产时，提现手续费会大幅提高。提现手续费的设计是为了保护那些长期帮助 DODO 健康发展的做市商。
 
 :::
 
-## Deposit Rewards
+## 充值奖励
 
-Rewards will be distributed to those who make a deposit of base(quote) tokens when the capital pool faces a shortage of base(quote) tokens.
+资产短缺时，向资产池充值的做市商会获得奖励。
 
-In the [next section](./math), we will explain the math behind these core concepts. 
+[下一部分](./math)，我们讲详细解说这些核心观念背后的数学原理。
 
-## Flexibility and $k$, the "Liquidity Parameter"
+## 灵活性、流动性参数 
 
-Last but not least, we will introduce the DODO's "liquidity parameter", $$k$$. The parameter $$k$$ gives DODO the flexibility to handle different market situations. 
+下面我们要介绍流动性参数 $k$ ，这个参数让 DODO 可以灵活应对不同的市场情况。
 
 ![](https://dodoex.github.io/docs/img/dodo_k.jpeg)
 
-When $$k$$ is $$0$$, DODO naively sells or buys at market price, as shown by the flat, blue line. As $$k$$ increases, DODO’s price curve becomes more “curved”, but, consequently, liquidity becomes increasingly jeopardized, because more funds are placed far away from market price and are thus underutilized or not utilized at all. When $$k$$ increases to $$1$$, the flat section near the market price is completely eliminated and the curve essentially becomes a standard AMM curve, which Uniswap uses.
+当 $$k$$ 等于 $$0$$ 时, DODO 会以市价正常交易（图中蓝线）；当 $$k$$ 变大时，DODO 的价格曲线会变得更陡，这是因为更多的市场资金会被放到远离市价的位置，资金利用率很低。当 $$k$$ 涨到 $$1$$ 时，市价附近的平滑曲线就会完全消失，这时候价格曲线和 Uniswap 的 AMM 曲线一样了。 
 
-Normally, $$k$$ is recommended to be a relatively small value, such as $$0.1$$, which could provide liquidity 10 times better than the standard AMM algorithm.
-
-
+通常，我们建议将 $$k$$ 设置为一个比较小的值，比如 $$0.1$$，这时候可以提供比 AMM 好 10 倍的流动性。
