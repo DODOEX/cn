@@ -1,34 +1,34 @@
 ---
 id: briefIntro
-title: Introduction to DODO
-sidebar_label: 什么是 DODO
+title: DODO 介绍
+sidebar_label: DODO 介绍
 ---
 
-## What is DODO
+## DODO 简介
 
-DODO is a next-generation on-chain liquidity provider, which leverages the Proactive Market Maker algorithm (PMM) to provide pure on-chain and contract-fillable liquidity for everyone.
+DODO 是新一代链上流动性解决方案，使用主动做市商算法（PMM）提供纯链上的、合约可组合性的流动性。
 
-## How does DODO work
+## DODO 机制
 
-DODO accepts liquidity providers’ assets. It gathers funds near market prices to provide sufficient liquidity. In order to minimize counterparty risks for LPs, DODO dynamically adjusts market prices to encourage arbitrageurs to step in and stabilize LPs' portfolios.
+DODO 使用做市商的资产在市价附近提供充足的流动性。同时，DODO 会通过动态调整价格引入套利者进行搬砖，降低做市商的风险。
 
-## Why DODO
+## DODO 优势
 
-- Low slippage
-- Single risk exposure
-- No impermanent loss
+- 低滑点
+- 单一风险敞口
+- 没有无常损失
 
-## What can I do with DODO
+## 如何参与使用 DODO？
 
-### As a trader
+### 作为交易者
 
-- Each and every trader enjoys sufficient liquidity similar to that of centralized exchanges
-- Arbitrageurs can profit from price discrepancies between DODO and other exchanges
-- Smart contracts can natively use DODO liquidity to complete on-chain transactions, such as liquidation and auctions
+- 普通交易者可以享受到像中心化交易所一样充足的流动性 
+- 套利者可以在 DODO 和其他交易所之间进行搬砖套利 
+- 智能合约可以原生地使用 DODO 流动性以完成清算，拍卖等链上操作
 
-### As a LP
+### 作为一个做市商
 
-- There are no minimal deposit requirements and restrictions on asset types
-- DODO charges a fee for each transaction and eventually distributes it to LPs as rewards
-- LPs can create trading pairs with their own tokens
-- LPs can obtain liquidity by depositing their tokens they already own, without taking on price risk
+- 不限充值最低数量和资产类型
+- 参与交易手续费分红
+- 自由创建交易对
+- 无需做市资金，只需要充值你自己的代币，就能获得流动性
