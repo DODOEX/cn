@@ -1,38 +1,38 @@
 ---
 id: bugBounty
-title: Bug Bounty 💰
-sidebar_label: Bug Bounty 💰
+title: 漏洞反馈奖励 💰
+sidebar_label: 漏洞反馈奖励 💰
 ---
 
-The DODO team has implemented a bug bounty program and invites bug bounty hunters to participate.
+DODO 团队开启了漏洞反馈奖励活动，非常欢迎大家报告漏洞。
 
-## Scope
+## 范围
 
-The scope of the bug bounty program is all contracts in the [DODO smart contracts repository](https://github.com/DODOEX/dodo-smart-contract).
+漏洞反馈奖励活动包括 [DODO 智能合约](https://github.com/DODOEX/dodo-smart-contract)里的所有合约。
 
-The probability of finding a bug and winning a reward for the three parts of DODO is: `Helper` > `Entrance` > `Core`.
+找到漏洞并赢得奖励的概率从大到小依次是： `Helper` > `Entrance` > `Core`.
 
 ![](https://dodoex.github.io/docs/img/dodo_framework.jpeg)
 
-## Rewards
+## 奖励
 
-Severity of bugs will be triaged and assessed under the [CVSS Risk Rating](https://www.first.org/cvss/calculator/3.0) scale. The rewards corresponding to the severities are as follows:
+我们将根据 [CVSS](https://www.first.org/cvss/calculator/3.0) 来评估漏洞的严重性，不同严重等级的漏洞对应的奖励：
 
-- Critical (9.0-10.0): Up to \$50,000
-- High (7.0-8.9): Up to \$10,000
-- Medium (4.0-6.9): Up to \$2,000
-- Low (0.1-3.9): Up to \$1,000
+- 极高（9.0-10）最高 5 万美元 
+- 高（7.0-8.9）最高 1 万美元 
+- 中（4.0-6.9）最高 2000 美元 
+- 低（0.1-3.9）最高 1000 美元 
 
-In addition to bug severity, rewards will be paid out based on the impact of the discovered vulnerabilities, as well as the level of difficulty in discovering these vulnerabilities.
+除了根据严重程度区分奖励，我们还会根据漏洞的影响和发现的难度给予不同的奖励。
 
-## Disclosure
+## 信息通告
 
-Any vulnerability or bug discovered must be reported _only_ to the DODO team at contact@dodoex.io. Bounty hunters must not disclose the vulnerability or bug publicly or to another person or entity prior to contacting the DODO team. In addition, disclosure to the DODO team must be made promptly following the discovery of the vulnerability. Please include as much information about the vulnerability as possible in your email, including:
+任何错误或者漏洞需通过 contact@dodoex.io 报告给 DODO 团队，这是唯一的渠道。 赏金猎人在与 DODO 联系之前，不得向其他个人或者团体透露。另外，在发现漏洞之后，请务必尽快告知 DODO 团队，并在邮件中尽可能详细地说明漏洞，包括：
 
-- The conditions on which reproducing the bug is contingent
-- The steps needed to reproduce the bug or, preferably, a proof of concept
-- The potential implications of the vulnerability being abused
+- 重现漏洞的条件 
+- 重现漏洞的步骤 
+- 漏洞潜在的危险 
 
-A detailed vulnerability report increases the likelihood of receiving a reward and may increase the monetary amount of the reward.
+详细的漏洞报告会提高获得奖励的可能和金额。
 
-Anyone who reports a unique, previously unreported vulnerability that results in a change to the code or a configuration change and who keeps such vulnerability confidential until it has been resolved by our engineers will be recognized publicly for their contribution, if agreed.
+对于提供有效的漏洞报告并保密的用户，我们会在征得您的同意后进行公开致谢。
