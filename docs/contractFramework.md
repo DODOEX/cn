@@ -1,7 +1,7 @@
 ---
-id: 框架
+id: framework
 title: Smart Contract Framework
-sidebar_label: Framework
+sidebar_label: 框架
 ---
 
 ## Overview

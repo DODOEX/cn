@@ -5,7 +5,7 @@ module.exports = {
   title: "DODO Docs",
   tagline: "Let's DODO it!",
   url: "https://DODOEX.github.io/cn",
-  baseUrl: "/docs/",
+  baseUrl: "/cn/",
   favicon: "img/favicon.png",
   organizationName: "DODOEX", // Usually your GitHub org/user name.
   projectName: "cn", // Usually your repo name.
@@ -20,11 +20,11 @@ module.exports = {
   ],
   themeConfig: {
     navbar: {
-      title: "DODO 文档中文",
+      title: "DODO 文档中心",
       logo: {
         alt: "DODO",
         src: "img/logo.svg",
-        href: "https://DODOEX.github.io/docs/",
+        href: "https://DODOEX.github.io/cn/",
       },
       links: [
         {
