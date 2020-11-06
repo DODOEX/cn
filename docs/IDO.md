@@ -1,27 +1,27 @@
 ---
 id: initialDODOOffering
-title: Initial DODO Offering
-sidebar_label: Initial DODO Offering
+title: 首次 DODO 上币发行
+sidebar_label: 首次 DODO 上币发行
 ---
 
-Initial DODO Offering (IDO) is a brand new approach to crypto asset issuance. Instead of paying exorbitant listing fees to get listed on CEXs or other DEXs, it is **literally free** to offer assets on DODO!
+首次 DODO 上币发行是一种全新的加密资产的发行方式。跟中心化交易所和其他去中心化交易所不同，在 DODO 上币发行是**完全免费的**。
 
-Normally, the PMM algorithm requires a price oracle to provide liquidity, but when there is no external market (which is usually the case when you are just starting your asset offering efforts), you can simply set the oracle price to a constant and start an initial DODO offering. 
+通常情况 PMM 算法需要预言机喂价来提供流动性，但是如果外部市场没有流动性（比如一个资产首次发行时），你可以直接将预言机价格设置为一个常数来开启首次 DODO 上币发行。
 
-## All You Need is Your Own Token
+## 你只需要提供自己的代币
 
-As discussed in previous sections, DODO, unlike AMM, does not require quote tokens. The only thing you need to do is to deposit your own tokens to the pool. After your token deposit, PMM creates ask side depth on its own. The more tokens you deposit, the better the liquidity.
+正如前边几节的介绍， DODO 与 AMM 算法的不同，不需要 quote token。你只需要向资产池充入自己的代币。存入代币后，PMM 会自动创建卖单深度。充入的代币越多，流动性越好。
 
-Because there are no quote tokens in the pool, there is no bid side depth, but there is no need to worry. There are also no base tokens in the market and no one is selling either. IDO might feel somewhat similar to an auction, but there are some important differences.
+因为资产池中没有 quote token ，所以没有买单，但是不用担心。市场上没有其他的人可以出售 base token。某种程度上，IDO 与拍卖相似，但是又有一些重要的不同点。
 
 ![](https://dodoex.github.io/docs/img/dodo_long_tail_1.jpeg)
 
-Remember the constant price you set for the oracle? That price would be the initial offering price. When a trader buys your tokens, the price rises and quote tokens start flowing into the pool. These quote tokens then produce bid side depth as a result. Maybe we could call IDO a bidirectional auction 🤔
+还记得我们上面提到的设定的恒定价格么？那个价格时首次发行价。当交易者买入你的代币时，价格会上涨，同时 quote token 会流入资产池。然后，这个quote token 会被挂到买单产生深度。或许我们把 IDO 叫做双向拍卖更加合适。 🤔
 
 ![](https://dodoex.github.io/docs/img/dodo_long_tail_2.jpeg)
 
-Compared to AMM-based platforms, asset issuance on DODO provides more benefits:
+与基于 AMM 算法的平台相比，在 DODO 上发行资产有更多的优势：
 
-- Sell tokens from an arbitrary price of your choice with zero capital requirement
-- Sufficient and contract-fillable liquidity
-- Flexible parameters (design your price curve by fine-tuning the parameters)
+- 充足的、可履行合约的流动性
+- 无资金要求的情况下，能以任意价格出售代币
+- 灵活的参数设置（通过微调参数设计独有的价格曲线） 
