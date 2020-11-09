@@ -31,10 +31,7 @@ PMM 在以下几个重要的方面都优于 AMM：
 在 PMM 算法中，要价流动性仅有资产池中的 base token 决定，而出价流动性仅由资产池中的 quote token 决定。PMM 算法允许 base token 和 quote token 资产不一致，也就是说允许流动性提供商存入任意数量的 base token 和 quote token。DODO 的流动性提供商只要存入他们已有的资产就够了。
 
 `
-注意：
-
-这样的机制非常简洁，当你想要与要价单成交时，你会使用流动性提供商的 base token ，与 quote token 无关。
-
+注意：PMM 机制非常简洁，当你想要与要价单成交时，你会使用流动性提供商的 base token ，与 quote token 无关。
 `
 
 ## 没有无常损失
