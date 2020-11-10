@@ -1,8 +1,8 @@
 module.exports = {
   someSidebar: {
-    开始: ["briefIntro"],
-    协议: ["advantages", "coreConcept", "math"],
-    合约: [
+    项目简介: ["briefIntro"],
+    协议相关: ["advantages", "coreConcept", "math"],
+    合约相关: [
       "framework",
       "contractUseGuide",
       "flashSwap",
@@ -10,8 +10,8 @@ module.exports = {
       "bugBounty",
       "audit",
     ],
-    "Use Case": ["initialDODOOffering"],
-    "Advanced Topics": [
+    "应用场景": ["initialDODOOffering"],
+    "更多": [
       "authority",
       "decentralization",
       "riskParameters",
