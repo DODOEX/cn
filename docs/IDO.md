@@ -14,14 +14,14 @@ sidebar_label: 首次 DODO 上币发行
 
 因为资产池中没有 quote token ，所以没有买单，但是不用担心。市场上没有其他的人可以出售 base token。某种程度上，IDO 与拍卖相似，但是又有一些重要的不同点。
 
-![](https://dodoex.github.io/docs/img/dodo_long_tail_1.jpeg)
+![](https://dodoex.github.io/cn/img/dodo_long_tail_1.jpeg)
 
-还记得我们上面提到的设定的恒定价格么？那个价格时首次发行价。当交易者买入你的代币时，价格会上涨，同时 quote token 会流入资产池。然后，这个quote token 会被挂到买单产生深度。或许我们把 IDO 叫做双向拍卖更加合适。 🤔
+还记得我们上面提到的设定的恒定价格么？那个价格时首次发行价。当交易者买入你的代币时，价格会上涨，同时 quote token 会流入资产池。然后，这个 quote token 会被挂到买单产生深度。或许我们把 IDO 叫做双向拍卖更加合适。 🤔
 
-![](https://dodoex.github.io/docs/img/dodo_long_tail_2.jpeg)
+![](https://dodoex.github.io/cn/img/dodo_long_tail_2.jpeg)
 
 与基于 AMM 算法的平台相比，在 DODO 上发行资产有更多的优势：
 
 - 充足的、可履行合约的流动性
 - 无资金要求的情况下，能以任意价格出售代币
-- 灵活的参数设置（通过微调参数设计独有的价格曲线） 
+- 灵活的参数设置（通过微调参数设计独有的价格曲线）

@@ -1,5 +1,5 @@
 module.exports = {
-  someSidebar: {
+  docs: {
     项目简介: ["briefIntro"],
     协议相关: ["advantages", "coreConcept", "math"],
     合约相关: [
@@ -10,8 +10,8 @@ module.exports = {
       "bugBounty",
       "audit",
     ],
-    "应用场景": ["initialDODOOffering"],
-    "更多": [
+    应用场景: ["initialDODOOffering"],
+    更多: [
       "authority",
       "decentralization",
       "riskParameters",

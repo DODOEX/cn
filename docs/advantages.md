@@ -10,11 +10,11 @@ DODO 是基于原创的**主动做市商算法（PMM）**的流动性解决方�
 
 很明显，PMM 曲线在市场价格附近比 AMM 曲线更平坦，这意味着 PMM 拥有较高的资金利用率和较低的滑点。 同时 PMM 提供的价格更优惠。
 
-![](https://dodoex.github.io/docs/img/dodo_curve.jpeg)
+![](https://dodoex.github.io/cn/img/dodo_curve.jpeg)
 
 当市场价格变化时，AMM 被动地依赖套利交易来改变价格。PMM 不会被动地等待套利者交易，而是主动改变价格曲线的位置，使得价格曲线始终在市场价附近保持平滑，即提供充足的流动性。
 
-![](https://dodoex.github.io/docs/img/dodo_curve_move.jpeg)
+![](https://dodoex.github.io/cn/img/dodo_curve_move.jpeg)
 
 PMM 在以下几个重要的方面都优于 AMM：
 
@@ -26,24 +26,22 @@ PMM 在以下几个重要的方面都优于 AMM：
 
 在上面的价格曲线中，每条价格曲线都包含两个部分：左侧的出价方和右侧的要价方。这两个部分可能具有不同的深度或流动性，导致所谓的[买入/卖出价差](https://en.wikipedia.org/wiki/Bid%E2%80%93ask_spread)。
 
-![](https://dodoex.github.io/docs/img/dodo_segment.jpeg)
+![](https://dodoex.github.io/cn/img/dodo_segment.jpeg)
 
 在 PMM 算法中，要价流动性仅有资产池中的 base token 决定，而出价流动性仅由资产池中的 quote token 决定。PMM 算法允许 base token 和 quote token 资产不一致，也就是说允许流动性提供商存入任意数量的 base token 和 quote token。DODO 的流动性提供商只要存入他们已有的资产就够了。
 
-`
-注意：PMM 机制非常简洁，当你想要与要价单成交时，你会使用流动性提供商的 base token ，与 quote token 无关。
-`
+`注意：PMM 机制非常简洁，当你想要与要价单成交时，你会使用流动性提供商的 base token ，与 quote token 无关。`
 
 ## 没有无常损失
 
-PMM 避免无偿损失的关键是保证流动性提供商的仓位稳定，不会随着价格的变化而变化。那么PMM 算法怎么保证流动性提供商的仓位稳定呢？答案是：鼓励套利交易。当个体交易者购买 base token 时，PMM 会略微提高价格，让套利者有利可图。搬砖套利可以保证资产池中资产不会发生大幅波动，这样的机制可以有效降低流动性提供商的无常损失。
+PMM 避免无偿损失的关键是保证流动性提供商的仓位稳定，不会随着价格的变化而变化。那么 PMM 算法怎么保证流动性提供商的仓位稳定呢？答案是：鼓励套利交易。当个体交易者购买 base token 时，PMM 会略微提高价格，让套利者有利可图。搬砖套利可以保证资产池中资产不会发生大幅波动，这样的机制可以有效降低流动性提供商的无常损失。
 
 ## 新一代流动性解决方案
 
 流动性是 DeFi 世界里最重要的资源，因为它是所有 DeFi 项目的根本。目前，市面上有两种去中心化流动性方案：
 
-- 算法做市（如 Uniswap） 
-- 基于订单簿的撮合（如 dYdX） 
+- 算法做市（如 Uniswap）
+- 基于订单簿的撮合（如 dYdX）
 
 以上两种方案都有一些缺陷：
 

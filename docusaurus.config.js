@@ -26,11 +26,17 @@ module.exports = {
         src: "img/logo.svg",
         href: "https://DODOEX.github.io/cn/",
       },
-      links: [
+      items: [
         {
           to: "docs/",
-          activeBasePath: "docs",
+          activeBasePath: "docs/",
           label: "文档",
+          position: "left",
+        },
+        {
+          to: "whitepaper",
+          activeBasePath: "whitepaper",
+          label: "白皮书",
           position: "left",
         },
         {
@@ -91,9 +97,10 @@ module.exports = {
     [
       "@docusaurus/preset-classic",
       {
+        debug: true,
         docs: {
           // It is recommended to set document id as docs home page (`docs/` path).
-          homePageId: "briefIntro",
+          // homePageId: "briefIntro",
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           editUrl: "https://github.com/DODOEX/cn/edit/master/",

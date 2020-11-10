@@ -12,7 +12,7 @@ PMM 本质上是利用智能合约求解一个积分和两个二次方程的算�
 
 对于交易者来说，最重要的是平均成交价格。平均交易价格是边际价格的积分 $P_{margin}$。我们用 base token 短缺的情况举个例子：
 
-![](https://dodoex.github.io/docs/img/dodo_integrate.jpeg)
+![](https://dodoex.github.io/cn/img/dodo_integrate.jpeg)
 
 $$\Delta Q =\int^{B_2}_{B_1}P_{margin}dB$$
 
@@ -33,7 +33,7 @@ $$P=\frac{\Delta Q}{B_2-B_1}=i*(1-k+k\frac{B_0^2}{B_1B_2})$$
 
 $$\Delta B = \frac{1}{i}(Q_2-Q_1)*(1-k+k\frac{Q_0^2}{Q_1Q_2})$$
 
-交易者想要交易的数量，比如 $\Delta B 已知，我们来推导下 quote token 短缺时的价格。
+交易者想要交易的数量，比如 \$\Delta B 已知，我们来推导下 quote token 短缺时的价格。
 
 $\Delta B, Q_0, Q_1$ 已知，我们可以通过推导二次方程得出 $Q_2$ ，把二次方程做个变形可以得到：
 
@@ -67,7 +67,7 @@ $$\frac{k}{B_1}B_0^2+(1-2k)B_0-[(1-k)B_1+\frac{\Delta Q}{i}] = 0$$
 
 $$B_0=B_1+B_1\frac{\sqrt{1+\frac{4k\Delta Q}{B_1 i}}-1}{2k}$$
 
-这种情况下， $\Delta Q=Q-Q_0$。可以证明， $\Delta Q \ge 0$ 时, $B_0\ge B_1$. 
+这种情况下， $\Delta Q=Q-Q_0$。可以证明， $\Delta Q \ge 0$ 时, $B_0\ge B_1$.
 
 这个结论非常重要，因为它确保了 base token 和 quote token 不会同时大于或小于回归目标。这意味着 PMM 只会出现核心观念中提到的三个状态。
 
@@ -75,7 +75,7 @@ $$B_0=B_1+B_1\frac{\sqrt{1+\frac{4k\Delta Q}{B_1 i}}-1}{2k}$$
 
 $$Q_0=Q_1+Q_1*\frac{\sqrt{1+\frac{4k\Delta B i}{Q_1}}-1}{2k}$$
 
-# 其他 
+# 其他
 
 这一节会介绍 PMM 算法相关的其他数学运算。
 
@@ -100,13 +100,11 @@ $$B_0=B_1+B_1*\frac{\sqrt{1+\frac{4k\Delta Q}{B_1 i}}-1}{2k}$$
 
 这种情况下，做市商一旦充入资金，做市商就会盈利，这被称为充值奖励，奖励主要是由让系统偏离平衡状态的交易者支付的。
 
-`
-注意：充值奖励并不是无风险的套利交易机会。
-`
+`注意：充值奖励并不是无风险的套利交易机会。`
 
 ## 提取
 
-同样，在做市商提取 $b$ 个 base token 后，$B_1$ 下降 $b$，$B_0$ 下降幅度更大。这笔提取会让所有的做市商遭受亏损，这是因为这笔提取让价格曲线变的更加陡，多余的quote token 买不回同样多的 base token。
+同样，在做市商提取 $b$ 个 base token 后，$B_1$ 下降 $b$，$B_0$ 下降幅度更大。这笔提取会让所有的做市商遭受亏损，这是因为这笔提取让价格曲线变的更加陡，多余的 quote token 买不回同样多的 base token。
 
 PMM 算法要求在这种情况下，提取需要支付一定的手续费。手续费等于这笔引起的做市商的亏损总和。这笔手续费将会被分配给还未提取的做市商。
 
