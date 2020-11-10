@@ -66,11 +66,9 @@ PMM 算法的优势之一是它可以分别管理 base 或 quote token。所以�
 
 这个函数会向资产池中，充入一个确定 `amount` 的资产，然后返回释放给你的 `capital` 资产额。
 
-:::注意
-
-Captital 代表做市商在资产池中所占份额。Captital 是一个ERC 20 格式的代币，可以自由交易。每个 DODO Pair 有两种代币，分别代表 base token 和 quote token。
-
-:::
+`
+注意：Captital 代表做市商在资产池中所占份额。Captital 是一个ERC 20 格式的代币，可以自由交易。每个 DODO Pair 有两种代币，分别代表 base token 和 quote token。
+`
 
 ```javascript
 
@@ -116,9 +114,9 @@ Captital 代表做市商在资产池中所占份额。Captital 是一个ERC 20 �
 
 在某些情况下，提取资产会被收取 [手续费](./coreConcept#withdraw-fee)。上述的两个函数可以预览提取手续费。如果你提交了提取 `amount` 申请，会被收取一定的 `penalty` 。
 
-:::注意
-收到的提款资产的最终金额是 **amount-penalty**.
-:::
+`
+注意：收到的提款资产的最终金额是 **amount-penalty**.
+`
 
 ## 对于开发人员
 
