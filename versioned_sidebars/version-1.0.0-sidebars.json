@@ -1,0 +1,103 @@
+{
+  "version-1.0.0/docs": [
+    {
+      "collapsed": true,
+      "type": "category",
+      "label": "项目简介",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-1.0.0/briefIntro"
+        }
+      ]
+    },
+    {
+      "collapsed": true,
+      "type": "category",
+      "label": "协议相关",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-1.0.0/advantages"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.0.0/coreConcept"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.0.0/math"
+        }
+      ]
+    },
+    {
+      "collapsed": true,
+      "type": "category",
+      "label": "合约相关",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-1.0.0/framework"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.0.0/contractUseGuide"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.0.0/flashSwap"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.0.0/deployedInfo"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.0.0/bugBounty"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.0.0/audit"
+        }
+      ]
+    },
+    {
+      "collapsed": true,
+      "type": "category",
+      "label": "应用场景",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-1.0.0/initialDODOOffering"
+        }
+      ]
+    },
+    {
+      "collapsed": true,
+      "type": "category",
+      "label": "更多",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-1.0.0/authority"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.0.0/decentralization"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.0.0/riskParameters"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.0.0/backtest"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.0.0/commonQuestions"
+        }
+      ]
+    }
+  ]
+}
