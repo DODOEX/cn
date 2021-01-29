@@ -28,6 +28,10 @@ module.exports = {
       },
       items: [
         {
+          type: "docsVersionDropdown",
+          position: "left",
+        },
+        {
           to: "docs/",
           activeBasePath: "docs/",
           label: "文档",
