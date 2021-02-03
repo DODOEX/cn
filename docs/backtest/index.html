@@ -6,15 +6,15 @@
 <meta name="generator" content="Docusaurus v2.0.0-alpha.66">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous"><title data-react-helmet="true">回测报告 | DODO Docs</title><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"><meta data-react-helmet="true" name="docusaurus_language" content="en"><meta data-react-helmet="true" name="docusaurus_version" content="1.0.0"><meta data-react-helmet="true" name="docusaurus_tag" content="docs-default-1.0.0"><meta data-react-helmet="true" property="og:title" content="回测报告 | DODO Docs"><meta data-react-helmet="true" name="description" content="研究背景"><meta data-react-helmet="true" property="og:description" content="研究背景"><meta data-react-helmet="true" property="og:url" content="https://DODOEX.github.io/cn/cn/docs/backtest"><link data-react-helmet="true" rel="shortcut icon" href="/cn/img/favicon.png"><link data-react-helmet="true" rel="canonical" href="https://DODOEX.github.io/cn/cn/docs/backtest"><link rel="stylesheet" href="/cn/styles.000d7f17.css">
 <link rel="preload" href="/cn/styles.83b857ec.js" as="script">
-<link rel="preload" href="/cn/runtime~main.76619bc4.js" as="script">
-<link rel="preload" href="/cn/main.d89326b6.js" as="script">
+<link rel="preload" href="/cn/runtime~main.fdab53f5.js" as="script">
+<link rel="preload" href="/cn/main.23a3a93b.js" as="script">
 <link rel="preload" href="/cn/1.34009491.js" as="script">
-<link rel="preload" href="/cn/2.87b3a6eb.js" as="script">
-<link rel="preload" href="/cn/73.0c35fa52.js" as="script">
+<link rel="preload" href="/cn/2.70776cdc.js" as="script">
+<link rel="preload" href="/cn/73.dc449b26.js" as="script">
 <link rel="preload" href="/cn/75.2e460afe.js" as="script">
-<link rel="preload" href="/cn/62e81aa6.155314a7.js" as="script">
+<link rel="preload" href="/cn/62e81aa6.f2136570.js" as="script">
 <link rel="preload" href="/cn/17896441.d8285517.js" as="script">
-<link rel="preload" href="/cn/5f5ff7ac.037c8b65.js" as="script">
+<link rel="preload" href="/cn/5f5ff7ac.8c7deb6d.js" as="script">
 </head>
 <body>
 <script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){var t=null;try{t=localStorage.getItem("theme")}catch(t){}return t}();t(null!==e?e:"light")}()</script><div id="__docusaurus">
@@ -22,14 +22,14 @@
 回测报告撰写于 2020 年 7 月 19 日。回测数据使用 Uniswap 从 2020 年 6 月 1 日到 2020 年 7 月 18 日的历史数据。
 :::</p><h3><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_2cZh" id="损失评估"></a>损失评估<a aria-hidden="true" tabindex="-1" class="hash-link" href="#损失评估" title="Direct link to heading">#</a></h3><p>损失的评估会相对更复杂些，因为之前没有类似 PMM 算法的项目。我们选择使用最严格的标准进行回测，假定:</p><ul><li>预言机价格总存在延迟</li><li>预言机价格每次更新都与市价偏离 0.5%（Chainlink 上限）</li><li>套利者有充足的资金，不错过每笔交易</li><li>套利者搬砖成本为 0.2%（包括中心化交易所手续费和 gas）</li></ul><p>我们使用 2018 年 4 月到 2020 年 4 月的 BTC 价格的历史数据，以 1 分钟为间隔进行回测。综合收益和损失，得出以下结论。</p><p><img src="https://dodoex.github.io/cn/img/dodo_backtest.png"></p><h2><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_2cZh" id="结论"></a>结论<a aria-hidden="true" tabindex="-1" class="hash-link" href="#结论" title="Direct link to heading">#</a></h2><p>回测覆盖了绝大多数市场环境包括熊市、牛市，甚至包括 2020 年 3 月 12 日的黑天鹅事件。我们得出的结论是：</p><ul><li>在大多数市场环境下，手续费收入可以弥补套利损失，同时带来很高的回报率（年化约 80%）</li><li>当市场剧烈波动时，不论涨跌，流动性提供商都会损失大量资金</li></ul><p>一句话，PMM 算法在市场稳定时可以获利，在市场剧烈波动时会亏损。</p><h3><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_2cZh" id="优劣势"></a>优劣势<a aria-hidden="true" tabindex="-1" class="hash-link" href="#优劣势" title="Direct link to heading">#</a></h3><p>大多数量化策略只有在市场出现单边行情时才能盈利，在市场平稳时却挣不到钱。而 PMM 却相反，在价格平稳变化时可以获得可观的收益。另外与 AMM 不同，PMM 算法不要求流动性提供商按照一定比例充入 base 和 quote token。所以当市场不稳定时，PMM 可以作为原有策略的补充。</p><p>俗话说，天上不会掉馅饼。当市场波动时，流动性提供商遭受巨大损失。流动性提供商需要平衡风险和收益。我们建议交易者在市场动荡时提出资产。作为一个去中心化项目，我们能做的非常有限。我们会尽量调整系统参数来帮助流动性提供商，尤其是在黑天鹅事件发生时。</p><p>另外，回测没办法 100% 模拟出真实交易的情况。为了降低这种风险，我们用最保守的假定条件进行回测。流动性提供商还是要理智地看待回测结果。</p><h3><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_2cZh" id="回测问题解答"></a>回测问题解答<a aria-hidden="true" tabindex="-1" class="hash-link" href="#回测问题解答" title="Direct link to heading">#</a></h3><ol><li>换手率数据怎么得到的？</li></ol><p>我们计算了 Uniswap 一个月的历史数据。因为 PMM 算法资金利用率很高达到 Uniswap 的十倍以上，所以实际换手率也会高很多。</p><ol start="2"><li>为什么使用 BTC 价格做回测研究？</li></ol><p>我们没有找到高精度的 ETH 价格数据，非常欢迎大家能向我们提供 1 分钟间隔的 ETH 历史价格数据。使用 BTC 历史价格进行回测估算损失是合理的，因为 ETH 和 BTC 价格高度相关。</p><ol start="3"><li>套利是怎么实现的？</li></ol><p>当套利者注意到 PMM 提供的价格跟市价相比有搬砖空间时，比如 PMM 和市价的差距大于搬砖的综合成本（PMM 手续费+搬砖成本）</p><ol start="4"><li>Chainlink 的 BTC 报价精度是 1%，这里为什么设置为 0.5%？</li></ol><p>Chainlink 很快将会把 BTC 价格的精度提升到 0.5%；另外，PMM 算法现在主要应用在 ETH 相关的交易对，而 Chainlink 的 ETH 价格精度是 0.5%。</p><ol start="5"><li>资金池的规模对于回测有影响么？</li></ol><p>肯定有影响。如果资金池规模太小，回报率不会太高的。我们需要充足的流动性与其他的项目竞争。事实上，回测是需要用 Uniswap 十分之一的资金池规模（约 90 万美金）就可以产生有竞争力的流动性。</p><ol start="6"><li>gas 消耗是怎样的？</li></ol><p>两个 ERC20 标准的代币进行交换，需要 145000~175000 gas。gas 会比 Uniswap （约 100000）略高，但是远低于其他协议。</p><p>比如像 Kyber，需要大约 400000 gas；Balancer 需要 300000 gas；dYdX 需要 400000 gas。</p></div></article><div class="margin-vert--xl"><div class="row"><div class="col"><a href="https://github.com/DODOEX/cn/edit/master/versioned_docs/version-1.0.0/backtest.md" target="_blank" rel="noreferrer noopener"><svg fill="currentColor" height="1.2em" width="1.2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 40 40" style="margin-right:0.3em;vertical-align:sub"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div></div></div><div class="margin-vert--lg"><nav class="pagination-nav" aria-label="Blog list page navigation"><div class="pagination-nav__item"><a class="pagination-nav__link" href="/cn/docs/riskParameters"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">« 风险参数</div></a></div><div class="pagination-nav__item pagination-nav__item--next"><a class="pagination-nav__link" href="/cn/docs/commonQuestions"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">常见问题 »</div></a></div></nav></div></div></div><div class="col col--3"><div class="tableOfContents_3SO_"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#研究背景" class="table-of-contents__link">研究背景</a></li><li><a href="#研究方法" class="table-of-contents__link">研究方法</a></li><li><a href="#回测" class="table-of-contents__link">回测</a><ul><li><a href="#收益评估" class="table-of-contents__link">收益评估</a></li><li><a href="#损失评估" class="table-of-contents__link">损失评估</a></li></ul></li><li><a href="#结论" class="table-of-contents__link">结论</a><ul><li><a href="#优劣势" class="table-of-contents__link">优劣势</a></li><li><a href="#回测问题解答" class="table-of-contents__link">回测问题解答</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="text--center"><div>Copyright © 2021 DODOEX, Inc. Built with Docusaurus.</div></div></div></footer></div>
 <script src="/cn/styles.83b857ec.js"></script>
-<script src="/cn/runtime~main.76619bc4.js"></script>
-<script src="/cn/main.d89326b6.js"></script>
+<script src="/cn/runtime~main.fdab53f5.js"></script>
+<script src="/cn/main.23a3a93b.js"></script>
 <script src="/cn/1.34009491.js"></script>
-<script src="/cn/2.87b3a6eb.js"></script>
-<script src="/cn/73.0c35fa52.js"></script>
+<script src="/cn/2.70776cdc.js"></script>
+<script src="/cn/73.dc449b26.js"></script>
 <script src="/cn/75.2e460afe.js"></script>
-<script src="/cn/62e81aa6.155314a7.js"></script>
+<script src="/cn/62e81aa6.f2136570.js"></script>
 <script src="/cn/17896441.d8285517.js"></script>
-<script src="/cn/5f5ff7ac.037c8b65.js"></script>
+<script src="/cn/5f5ff7ac.8c7deb6d.js"></script>
 </body>
 </html>
