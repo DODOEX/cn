@@ -17,7 +17,39 @@ sidebar_label: 开发者信息
 | Locked Token Vault 2      | [0xde25cebdd50ff2af17bbc8b3cbf2e31c48b769b4](https://etherscan.io/address/0xde25cebdd50ff2af17bbc8b3cbf2e31c48b769b4) |
 | Undistributed Token Vault | [0x3e19d726ed435AfD3A42967551426b3A47c0F5b7](https://etherscan.io/address/0x3e19d726ed435AfD3A42967551426b3A47c0F5b7) |
 
-## 主网
+## 主网 - V2
+
+| 智能路由合约                     | 地址                                                                                                                  |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| DODO Approve                   | [0xCB859eA579b28e02B87A1FDE08d087ab9dbE5149](https://etherscan.io/address/0xCB859eA579b28e02B87A1FDE08d087ab9dbE5149) |
+| DODO Approve Proxy             | [0x335aC99bb3E51BDbF22025f092Ebc1Cf2c5cC619](https://etherscan.io/address/0x335aC99bb3E51BDbF22025f092Ebc1Cf2c5cC619) |
+| DODO V2Proxy02                 | [0xa356867fDCEa8e71AEaF87805808803806231FdC](https://etherscan.io/address/0xa356867fDCEa8e71AEaF87805808803806231FdC) |
+
+------
+
+| 交易挖矿合约                     | 地址                                                                                                                  |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| DODO Incentive                 | [0x989DcAA95801C527C5B73AA65d3962dF9aCe1b0C](https://etherscan.io/address/0x989DcAA95801C527C5B73AA65d3962dF9aCe1b0C) |
+
+------
+
+| 工厂合约                        | 地址                                                                                                                  |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| CrowdPooling Factory           | [0xE8C9A78725D0451FA19878D5f8A3dC0D55FECF25](https://etherscan.io/address/0xE8C9A78725D0451FA19878D5f8A3dC0D55FECF25) |
+| DODO Private Pool Factory      | [0x6B4Fa0bc61Eddc928e0Df9c7f01e407BfcD3e5EF](https://etherscan.io/address/0x6B4Fa0bc61Eddc928e0Df9c7f01e407BfcD3e5EF) |
+| DODO Vending Machine Factory   | [0x72d220cE168C4f361dD4deE5D826a01AD8598f6C](https://etherscan.io/address/0x72d220cE168C4f361dD4deE5D826a01AD8598f6C) |
+| DODO ERC20 Factory             | [0x44D5dF24d5Ef52A791D6436Fa45A8D426f6de34e](https://etherscan.io/address/0x44D5dF24d5Ef52A791D6436Fa45A8D426f6de34e) |
+
+
+## 主网 - V1.5
+
+| 智能路由合约                     | 地址                                                                                                                  |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| DODO Approve                   | [0xCB859eA579b28e02B87A1FDE08d087ab9dbE5149](https://etherscan.io/address/0xCB859eA579b28e02B87A1FDE08d087ab9dbE5149) |
+| DODO Approve Proxy             | [0x335aC99bb3E51BDbF22025f092Ebc1Cf2c5cC619](https://etherscan.io/address/0x335aC99bb3E51BDbF22025f092Ebc1Cf2c5cC619) |
+| DODO V1Proxy04                 | [0xa2CB66EBB947D217f61510882096F6e95c1DE97D](https://etherscan.io/address/0xa2CB66EBB947D217f61510882096F6e95c1DE97D) |
+
+## 主网 - V1
 
 | 合约                           | 地址                                                                                                                  |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
