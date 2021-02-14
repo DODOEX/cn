@@ -8,19 +8,17 @@ DODO 团队开启了漏洞反馈奖励活动，非常欢迎大家报告漏洞。
 
 ## 范围
 
-漏洞反馈奖励活动包括 [DODO 智能合约](https://github.com/DODOEX/dodo-smart-contract)里的所有合约。
+漏洞反馈奖励活动包括 [DODO V2 智能合约](https://github.com/DODOEX/contractV2)里的所有合约。
 
-找到漏洞并赢得奖励的概率从大到小依次是： `Helper` > `Entrance` > `Core`.
-
-![](https://dodoex.github.io/cn/img/dodo_framework.jpeg)
+![](https://dodoex.github.io/cn/img/dodo_framework_v2.png)
 
 ## 奖励
 
 我们将根据 [CVSS](https://www.first.org/cvss/calculator/3.0) 来评估漏洞的严重性，不同严重等级的漏洞对应的奖励：
 
-- 极高（9.0-10）最高 5 万美元
+- 极高（9.0-10）最高 10 万美元
 - 高（7.0-8.9）最高 1 万美元
-- 中（4.0-6.9）最高 2000 美元
+- 中（4.0-6.9）最高 5000 美元
 - 低（0.1-3.9）最高 1000 美元
 
 除了根据严重程度区分奖励，我们还会根据漏洞的影响和发现的难度给予不同的奖励。

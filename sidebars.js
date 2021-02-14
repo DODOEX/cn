@@ -7,6 +7,7 @@ module.exports = {
       "contractUseGuide",
       "flashSwap",
       "deployedInfo",
+      "deployedInfoBsc",
       "bugBounty",
       "audit",
     ],

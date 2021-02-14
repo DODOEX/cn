@@ -10,61 +10,49 @@ sidebar_label: 闪电交换
 
 ## 闪电交换机制
 
-![](https://dodoex.github.io/cn/img/dodo_flash_swap.jpeg)
+![](https://dodoex.github.io/cn/img/dodo_flash_swap_v2.png)
 
-上图说明了闪电交换的四个步骤：
+上图说明了 DODO V2 闪电交换的四个步骤：
 
-1.  调用 `DODO Pair` 合约中的 `buyBaseToken` 函数
-2.  `DODO Pair` 将 base token 发送给申请者
-3.  如果 `buyBaseToken` 函数调用的参数`data`数据不为空，则 `DODO Pair` 智能合约将调用申请者的 `dodoCall` 方法
-4.  `dodoCall` 执行后，`DODO Pair` 智能合约将从申请者那里检索所需的 quotetoken
+1.  调用池子合约中的 `flashLoan` 函数
+2.  池子 将 base 以及 quote token 发送给申请者（其中 baseAmount 或者 quoteAmount 可以借出为0）
+3.  如果 `flashLoan` 函数调用的参数`data`数据不为空，则 合约将调用申请者传入 assetTo 合约地址中的 `DVMFlashLoanCall` 或者 `DPPFlashLoanCall` 方法 (对应公开池与私有池)
+4.  `DVMFlashLoanCall` 或 `DPPFlashLoanCall` 执行后，需要返回代币，合约会计算池子是否亏损，若亏损则直接交易失败。
 
-:::注意
-`sellBaseToken` 函数还可以以相同方式执行闪电交换。
-:::
+```javaScript
+    function flashLoan(
+        uint256 baseAmount,
+        uint256 quoteAmount,
+        address assetTo,
+        bytes calldata data
+    ) external;
+```
+
+`
+注：DODO V2 闪电贷仅当返还的base quote 数量比例产生变化时，合约会预览一笔将base quote 磨平的交易，该磨平交易手续费作为闪电贷手续费。其他情况不收取手续费用
+`
+
 
 闪电交换要求申请者是可以实现 `IDODOCallee` 接口的合约。
 
 ```javascript
 interface IDODOCallee {
-    function dodoCall(
-        bool isBuyBaseToken,
+    function DVMSellShareCall(
+        address payable assetTo,
+        uint256,
+        uint256 baseAmount,
+        uint256 quoteAmount,
+        bytes calldata
+    ) external;
+
+    function DPPFlashLoanCall(
+        address sender,
         uint256 baseAmount,
         uint256 quoteAmount,
         bytes calldata data
     ) external;
 }
 ```
-
-## 闪电交换可以做什么？
-
-闪电交换可以提高做市的效率。市场平家由套利者来维持，闪电交换可以搬砖不再有资金要求，降低了搬砖套利的门槛。
-
-我们来演示一个完全无风险的套利交易组合作为闪电交换的应用示例。请参考 `UniswapArbitrageur.sol` 的[源代码](https://github.com/DODOEX/dodo-smart-contract/blob/master/contracts/helper/UniswapArbitrageur.sol) 作为示例，[点击查看](https://etherscan.io/address/0xbf90b54cc00ceeaa93db1f6a54a01e3fe9ed4422)。套利演示：
-
-![](https://dodoex.github.io/cn/img/dodo_one_click_arbitrage.jpeg)
-
-完整套利交易包括 9 个步骤：
-
-1.  用户调用 `UniswapArbitrageur` 的 `executeBuyArbitrage` 函数
-2.  `UniswapArbitrageur` 调用 `DODO Pair` 的 `buyBaseToken` 函数，触发闪电交换
-3.  `DODO Pair` 向 `UniswapArbitrageur` 转 1 WETH
-4.  `DODO Pair` 调用 `UniswapArbitrageur` 的 `dodoCall` 函数
-5.  `UniswapArbitrageur` 将收到的 1 WETH 转给 `UniswapV2`
-6.  `UniswapArbitrageur` 调用 `UniswapV2` 的 `swap` 函数
-7.  `UniswapV2` 向 `UniswapArbitrageur` 转 200 USDC
-8.  `DODO Pair` 调用 `transferFrom` 函数从 `UniswapArbitrageur` 接受 150 USDC
-9.  `UniswapArbitrageur` 把剩下的 50 USDC 转给用户
-
-综上
-
-- 第 2，3，4，8 步由 DODO 运行
-- 第 5，6，7 步由 Uniswap 运行
-- 用户只要发起交易就可以套利，完全不用参与其他步骤。
-
-`UniswapArbitrageur` 合约中最棒的地方自于用户不需要任何资金，也不需要知道 DODO 和 Uniswap 的工作机制。他们只需要调用一个函数，成功后即可获利；即使失败，用户也只会损失一些 gas 费。
-
-为了避免不必要的 gas 损耗，我们建议用户使用 `eth_call` 提前执行 `executeBuyArbitrage` 或 `executeSellArbitrage` 来估算套利收益。如果有套利机会，这两个函数会返回搬砖成功的收益。
 
 ## 一些想法
 

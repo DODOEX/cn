@@ -4,131 +4,170 @@ title: 合约用户指南
 sidebar_label: 合约用户指南
 ---
 
-## For traders
+## 对于交易者
 
-整个合约中与交易者相关的函数只有两个： `buyBaseToken` and `sellBaseToken`
+DODO V2 提供了统一的`DODOV2Proxy`，针对底层的池子进行封装，可以在上层实现多跳池子连续交易。若交易者有直接使用底层池子交易的需求，我们也针对不同类型的池子进行了统一定义，暴露出两个函数供使用： `sellBase` and `sellQuote`
 
 ```javascript
-function buyBaseToken(
-    uint256 amount,
-    uint256 maxPayQuote,
-    bytes calldata data
-) external returns (uint256 payQuote);
+ function sellBase(
+   address to
+ ) external returns (uint256 receiveQuoteAmount);
 ```
 
-这个函数确定购买 base token 的 `amount` 数量。 如果需要购买这些 quote token 需要支付的 base token 的数量大于 `maxPayQuote`，则交易将被重置。如果 `data` 不为空，闪电交换将会被触发。
-
-`payQuote` 的返回值是交易者需要支付的 quote token 的数量。
+sellBase可以实现卖出base token，得到quote token。这个函数需要交易者构造一笔包含两个动作的交易，第一个动作是转入需要交换的base token至当前池子合约中，第二个动作是将交换的接收地址作为参数，触发sellBase。结束前建议交易者对`receiveQuoteAmount`进行余额检查，以确保交易的安全执行
 
 ```javascript
-function sellBaseToken(
-    uint256 amount,
-    uint256 minReceiveQuote,
-    bytes calldata data
-) external returns (uint256 receiveQuote);
+ function sellQuote(
+   address to
+ ) external returns (uint256 receiveBaseAmount);
 ```
 
-这个函数确定出售 base token的 `amount` 数量。如果要接受的 quote token 的数量小于 `minReceiveQuote`，maxPayQuote，则交易将被重置。如果 `data` 不为空，闪电交换将会被触发。
+同理，sellQuote可以实现卖出quote token，得到base token。这个函数同样需要交易者构造一笔包含两个动作的交易，第一个动作是转入需要交换的quote token至当前池子合约中，第二个动作是将交换的接收地址作为参数，触发sellQuote。结束前建议交易者对`receiveBaseAmount`进行余额检查，以确保交易的安全执行
 
-`receiveQuote` 的返回值是交易者需要支付的 quote token 的数量。
-
-DODO 同样会提供这两个函数的预览版本，预览函数可以在不发送交易的情况下执行，可以帮助用户预估价格节省 gas 费。
+DODO V2 同样会提供以上两个函数的结果预览，预览函数可以在不发送交易的情况下执行，帮助交易者预估价格，以节省 gas 费。注：传入的trader为交易者公钥地址
 
 ```javascript
-function querySellBaseToken(
-  uint256 amount
-) external view returns (uint256 receiveQuote);
+ function querySellBase(
+   address trader, 
+   uint256 payBaseAmount
+ ) external view  returns (uint256 receiveQuoteAmount,uint256 mtFee);
 
-function queryBuyBaseToken(
-  uint256 amount
-) external view returns (uint256 payQuote);
+ function querySellQuote(
+   address trader, 
+   uint256 payQuoteAmount
+ ) external view  returns (uint256 receiveBaseAmount,uint256 mtFee);
 ```
 
 下面一部分我们会着重介绍[闪电交换](./flashSwap).
 
 ## 对于做市商
 
-对于做市商来说，充值和提取是最重要的两个函数。我们提供一系列的函数帮助做市商灵活高效的管理他们的资产。
+DODO V2 设计了两种类型的池子，包括公开池以及私有池，同样的 DODO V2 提供了统一的`DODOV2Proxy`，封装了不同类型池子流动性管理功能。以下是直接与池子底层交互的做市商管理方法。
 
-PMM 算法的优势之一是它可以分别管理 base 或 quote token。所以下面的函数有两个版本，一个后缀是 Base，一个后缀是 Quote，他们分别用于管理 Base token 和 quote token。两个版本有相同的输入和输出值。
+### 公开池
 
-```javascript
-
-  function depositBase(
-    uint256 amount
-  ) external returns (uint256 capital)
-
-  function depositQuote(
-    uint256 amount
-  ) external returns (uint256 capital)
-
-```
-
-这个函数会向资产池中，充入一个确定 `amount` 的资产，然后返回释放给你的 `capital` 资产额。
+公开池是任何人均可参与的一种池子，并且由于DODO的灵活设计，相同的交易对可以有不同参数设定的池子，用户选择公开池参与做市时，按池子当前的比例充入`base` 与 `quote`资产，获得池子铸造的`shares`资产额。
 
 `
-注意：Captital 代表做市商在资产池中所占份额。Captital 是一个ERC 20 格式的代币，可以自由交易。每个 DODO Pair 有两种代币，分别代表 base token 和 quote token。
+注意：shares 代表做市商在资产池中所占份额。其是一个ERC 20 格式的代币，可以自由交易。每个公开池对应一种shares。
 `
 
 ```javascript
-
-  function getLpBaseBalance(address lp) public view returns (uint256 lpBalance)
-
-  function getLpQuoteBalance(address lp) public view returns (uint256 lpBalance)
-
+ function buyShares(
+   address to
+ ) external returns (uint256 shares, uint256 baseInput, uint256 quoteInput)
 ```
 
-根据做市商的地址查询资产池余额。返回值 `lpBalance` 代表实际的 base 或 quote token 数量，而不是 Capital token。
+这个函数可实现向池子注入流动性，需要做市商构造一笔包含两个操作的交易，第一个操作是按池子当前的base、quote比例，存代币至池子合约，第二个操作是将shares接收地址作为参数，触发buyShares。结束前建议做市商对`baseInput`，`quoteInput`这两个实际存入的代币数量进行数量检查，以确保交易的安全执行
+
 
 ```javascript
-
-  function withdrawBase(
-    uint256 amount
-  ) external returns (uint256 receive)
-
-  function withdrawQuote(
-    uint256 amount
-  ) external returns (uint256 receive)
-
+ function sellShares(
+    uint256 shareAmount,
+    address to,
+    uint256 baseMinAmount,
+    uint256 quoteMinAmount,
+    bytes calldata data,
+    uint256 deadline
+ ) external returns (uint256 baseAmount, uint256 quoteAmount)
 ```
 
-这个函数尝试从资本池中提取一定 `amount` 数量的资产。由于可能产生提取手续费，这个函数返回的具体的数量。
+这个函数可实现从池子提取流动性，做市商可以直接调用池子对应的函数执行交易，其中传入的参数包括移除的shares数量、资金接收地址、以及用于滑点保护的baseMinAmount（预期最小接收的base数量），quoteMinAmount（预期最小接收的quote数量），data一般设置为空即可，若不为空，会在函数执行的最后，执行外部合约调用，以实现诸如WETH转为ETH等额外功能，最后的deadline为交易发出后的有效时间，超时自动revert，以保护交易的安全执行
+
+
+### 私有池
+
+
+私有池完全由单一的做市商（做市机构或者项目方等）进行做市，拥有动态修改池子参数，自由控制资金出入的权限，为实现链上做市策略提供了足够的灵活度。私有池存在管理员（owner）身份，同时管理员可以设定操作员（operator），以实现私有池子的权限控制。
+
+私有池的操作员（operator）可以直接调用`DODOV2Proxy`中的重置函数来实现做市
 
 ```javascript
-
-  function withdrawAllBase() external returns (uint256 receive)
-
-  function withdrawAllQuote() external returns (uint256 receive)
-
+  
+  function resetDODOPrivatePool(
+    address dppAddress,
+    uint256[] memory paramList,  //0 - newLpFeeRate, 1 - newI, 2 - newK
+    uint256[] memory amountList, //0 - baseInAmount, 1 - quoteInAmount, 2 - baseOutAmount, 3- quoteOutAmount
+    uint8 flag, // 0 - ERC20, 1 - baseInETH, 2 - quoteInETH, 3 - baseOutETH, 4 - quoteOutETH
+    uint256 minBaseReserve,
+    uint256 minQuoteReserve,
+    uint256 deadLine
+  ) external;
 ```
 
-由于资金池的规模不断发生变化（任何时候都有可能产生交易），为了帮助做市商提出所有资产，上边的两个函数可以提取所有的资金。最终，申请者可以接受到确切资产数量。
+参数说明如下：
+
+- dppAddress：私有池的合约地址
+- paramList：按序传⼊新的手续费率，价格（base/quote，单位是 18 - base decimals + quote decimals），新的曲线波动系数（0 代表恒定价格卖币，10**18 代表类Uniswap的价格曲线斜率）
+- amountList: 按序传⼊baseInAmount、quoteInAmount、baseOutAmount、 quoteOutAmount，可以为0
+- flag: 主要⽤于ETH与WETH的互转标识, 0 代表不需要转换， 1代表添加的base为eth， 2代表添加的quote为eth，3 代表移除的base转为eth， 4 代表移除的quote转为eth
+- minBaseReserve && minQuoteReserve: 当做市商发起交易，修改池⼦参数时，可能会造成池⼦的价格改变，这时候机器⼈可能会抢跑套利，因此这两个参数设定后，当执⾏时池⼦现存的base，quote的数量⼩ 于传⼊的值，改交易会失败。起到保护的机制，建议每笔交易均设定
+- deadline: 交易时效保护，超时后直接失败
+
+平台同样提供了私有池的管理员（owner）底层调用重置函数的方法，即通过触发私有池的管理合约实现（管理合约对应私有池中owner参数的地址）
 
 ```javascript
-
-  function getWithdrawQuotePenalty(uint256 amount) public view returns (uint256 penalty)
-
-  function getWithdrawBasePenalty(uint256 amount) public view returns (uint256 penalty)
-
+    
+  function reset(
+    address operator,
+    uint256 newLpFeeRate,
+    uint256 newI,
+    uint256 newK,
+    uint256 baseOutAmount,
+    uint256 quoteOutAmount,
+    uint256 minBaseReserve,
+    uint256 minQuoteReserve
+  ) external; 
 ```
+其中operator为操作员地址，若管理员直接调用，此处可以为空。其他参数说明同上
 
-在某些情况下，提取资产会被收取 [手续费](./coreConcept#withdraw-fee)。上述的两个函数可以预览提取手续费。如果你提交了提取 `amount` 申请，会被收取一定的 `penalty` 。
-
-`
-注意：收到的提款资产的最终金额是 **amount-penalty**.
-`
 
 ## 对于开发人员
 
-开发人员可以从 DODO 的框架 DODO Zoo 的接口获取元数据。
+开发人员可以从工厂合约（`DPPFactory` && `DVMFactory` 统一定义读函数，可被分别调用）中获取平台已经创建的所有池子地址，以实现检索展示等功能
 
 ```javascript
 
-  function getDODO(
+  function getDODOPool(
     address baseToken,
     address quoteToken
-  ) external view returns (address)
+  ) external view returns (address[] memory pools)
+
+  function getDODOPoolBidirection(
+    address token0,
+    address token1
+  ) external view returns (address[] memory baseToken0Pool, address[] memory baseToken1Pool)
+
+  function getDODOPoolByUser(
+    address user
+  ) external view returns (address[] memory pools)
 
 ```
 
-给定 `baseToken` 和 `quoteToken` , 在 `DODO Zoo` 只能同时注册一个 `DODO Pair`。
+getDODOPool 与 getDODOPoolBidirection 的区别是前者需要按照区分出base、quote按序作为参数传入，而后者不需要区分base、quote，检索出的结果包括两个数组，分别对应token0为base的列表，以及token1为池子的列表。最后一个检索函数以创建者地址作为参数，获取其账户下创建的池子列表
+
+
+同时，我们提供了实时监听DODO平台创建与移除池子的事件，可以更方便的实时维护平台最新的池子列表
+
+```javascript
+
+  event NewDVM(
+      address baseToken,
+      address quoteToken,
+      address creator,
+      address dvm
+  );
+
+  event RemoveDVM(address dvm);
+
+  event NewDPP(
+      address baseToken,
+      address quoteToken,
+      address creator,
+      address dpp
+  );
+
+  event RemoveDPP(address dpp);
+```
+
+其中`NewDVM`与`RemoveDVM`是`DVMFactory`中的事件，而 `NewDPP` 与 `RemoveDPP` 是 `DPPFactory`中的事件
