@@ -72,7 +72,7 @@ DODO V2 设计了两种类型的池子，包括公开池以及私有池，同样
  ) external returns (uint256 baseAmount, uint256 quoteAmount)
 ```
 
-这个函数可实现从池子提取流动性，做市商可以直接调用池子对应的函数执行交易，其中传入的参数包括移除的shares数量、资金接收地址、以及用于滑点保护的baseMinAmount（预期最小接收的base数量），quoteMinAmount（预期最小接收的quote数量），data一般设置为空即可，若不为空，会在函数执行的最后，执行外部合约调用，以实现诸如WETH转为ETH等额外功能，最后的deadline为交易发出后的有效时间，超时自动revert，以保护交易的安全执行
+这个函数可实现从池子提取流动性，做市商可以直接调用池子对应的函数执行交易，其中传入的参数包括移除的shares数量、资金接收地址、以及用于滑点保护的baseMinAmount（预期最小接收的base数量），quoteMinAmount（预期最小接收的quote数量），data一般设置为空即可，若不为空，会在函数执行的最后，执行外部合约调用，以实现诸如WETH转为ETH等额外功能，最后的deadline为交易发出后的有效时间，超时自动失败，以保护交易的安全执行
 
 
 ### 私有池
@@ -101,7 +101,7 @@ DODO V2 设计了两种类型的池子，包括公开池以及私有池，同样
 - paramList：按序传⼊新的手续费率，价格（base/quote，单位是 18 - base decimals + quote decimals），新的曲线波动系数（0 代表恒定价格卖币，10**18 代表类Uniswap的价格曲线斜率）
 - amountList: 按序传⼊baseInAmount、quoteInAmount、baseOutAmount、 quoteOutAmount，可以为0
 - flag: 主要⽤于ETH与WETH的互转标识, 0 代表不需要转换， 1代表添加的base为eth， 2代表添加的quote为eth，3 代表移除的base转为eth， 4 代表移除的quote转为eth
-- minBaseReserve && minQuoteReserve: 当做市商发起交易，修改池⼦参数时，可能会造成池⼦的价格改变，这时候机器⼈可能会抢跑套利，因此这两个参数设定后，当执⾏时池⼦现存的base，quote的数量⼩ 于传⼊的值，改交易会失败。起到保护的机制，建议每笔交易均设定
+- minBaseReserve && minQuoteReserve: 当做市商发起交易，修改池⼦参数时，可能会造成池⼦的价格改变，这时候机器⼈可能会抢跑套利，因此这两个参数设定后，当执⾏时池⼦现存的base，quote的数量⼩ 于传⼊的值，该交易会失败。起到保护的机制，建议每笔交易均设定
 - deadline: 交易时效保护，超时后直接失败
 
 平台同样提供了私有池的管理员（owner）底层调用重置函数的方法，即通过触发私有池的管理合约实现（管理合约对应私有池中owner参数的地址）
@@ -124,7 +124,7 @@ DODO V2 设计了两种类型的池子，包括公开池以及私有池，同样
 
 ## 对于开发人员
 
-开发人员可以从工厂合约（`DPPFactory` && `DVMFactory` 统一定义读函数，可被分别调用）中获取平台已经创建的所有池子地址，以实现检索展示等功能
+开发人员可以从工厂合约（`DPPFactory` && `DVMFactory` 需被分别调用）中获取平台已经创建的所有池子地址，以实现检索展示等功能
 
 ```javascript
 
@@ -144,7 +144,7 @@ DODO V2 设计了两种类型的池子，包括公开池以及私有池，同样
 
 ```
 
-getDODOPool 与 getDODOPoolBidirection 的区别是前者需要按照区分出base、quote按序作为参数传入，而后者不需要区分base、quote，检索出的结果包括两个数组，分别对应token0为base的列表，以及token1为池子的列表。最后一个检索函数以创建者地址作为参数，获取其账户下创建的池子列表
+getDODOPool 与 getDODOPoolBidirection 的区别是前者需要区分出base、quote按序作为参数传入，而后者不需要区分base、quote，检索出的结果包括两个数组，分别对应token0为base的池子列表，以及token1为base的池子列表。最后一个检索函数以创建者地址作为参数，获取其账户下创建的池子列表
 
 
 同时，我们提供了实时监听DODO平台创建与移除池子的事件，可以更方便的实时维护平台最新的池子列表

@@ -20,6 +20,7 @@ sidebar_label: 闪电交换
 4.  `DVMFlashLoanCall` 或 `DPPFlashLoanCall` 执行后，需要返回代币，合约会计算池子是否亏损，若亏损则直接交易失败。
 
 ```javaScript
+
     function flashLoan(
         uint256 baseAmount,
         uint256 quoteAmount,
