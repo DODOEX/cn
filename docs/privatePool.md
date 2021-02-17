@@ -57,8 +57,6 @@ sidebar_label: DODO V2 私有池
 
 3. 如果k是一个接近0的小量则退化为curve
 
-![](https://dodoex.github.io/cn/img/dpp_3.png)
-
 PMM 的价格曲线对应的公式为:
 
 $$P_{margin}=iR$$

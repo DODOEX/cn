@@ -1,8 +1,8 @@
 ---
 id: briefIntro
-title: DODO 介绍 [v2]
+title: DODO V2
 slug: /
-sidebar_label: DODO 介绍
+sidebar_label: DODO V2介绍
 ---
 
 ## 项目介绍

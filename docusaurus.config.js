@@ -38,12 +38,6 @@ module.exports = {
           position: "left",
         },
         {
-          to: "whitepaper",
-          activeBasePath: "whitepaper",
-          label: "白皮书",
-          position: "left",
-        },
-        {
           href: "https://app.dodoex.io",
           label: "交易所",
           position: "left",
