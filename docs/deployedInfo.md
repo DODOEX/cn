@@ -18,7 +18,7 @@ sidebar_label: 开发者信息
 | Undistributed Token Vault       | [0x3e19d726ed435AfD3A42967551426b3A47c0F5b7](https://etherscan.io/address/0x3e19d726ed435AfD3A42967551426b3A47c0F5b7) |
 | Locked Token (Migrate to BSC)   | [0x02fCB21dc1cf221939C1d4277fB54016b5d32bC7](https://etherscan.io/address/0x02fCB21dc1cf221939C1d4277fB54016b5d32bC7) |
 
-## 主网 - V2 (测试阶段)
+## 主网 - V2 (公测阶段)
 
 | 合约                            | 地址                                                                                                                  |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
@@ -31,14 +31,6 @@ sidebar_label: 开发者信息
 | DODO ERC20 Factory             | [0x44D5dF24d5Ef52A791D6436Fa45A8D426f6de34e](https://etherscan.io/address/0x44D5dF24d5Ef52A791D6436Fa45A8D426f6de34e) |
 | DODO Trade Incentive           | [0x989DcAA95801C527C5B73AA65d3962dF9aCe1b0C](https://etherscan.io/address/0x989DcAA95801C527C5B73AA65d3962dF9aCe1b0C) |
 
-
-## 主网 - V1.5
-
-| 合约                            | 地址                                                                                                                  |
-| ------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
-| DODO Approve                   | [0xCB859eA579b28e02B87A1FDE08d087ab9dbE5149](https://etherscan.io/address/0xCB859eA579b28e02B87A1FDE08d087ab9dbE5149) |
-| DODO Approve Proxy             | [0x335aC99bb3E51BDbF22025f092Ebc1Cf2c5cC619](https://etherscan.io/address/0x335aC99bb3E51BDbF22025f092Ebc1Cf2c5cC619) |
-| DODO V1Proxy04                 | [0xa2CB66EBB947D217f61510882096F6e95c1DE97D](https://etherscan.io/address/0xa2CB66EBB947D217f61510882096F6e95c1DE97D) |
 
 ## 主网 - V1
 
@@ -54,11 +46,9 @@ sidebar_label: 开发者信息
 | DODO Pair: YFI-USDC            | [0x1b7902a66f133d899130bf44d7d879da89913b2e](https://etherscan.io/address/0x1b7902a66f133d899130bf44d7d879da89913b2e) |
 | DODO Pair: FIN-USDT            | [0x9d9793e1e18cdee6cf63818315d55244f73ec006](https://etherscan.io/address/0x9d9793e1e18cdee6cf63818315d55244f73ec006) |
 | DODO Pair: USDT-USDC           | [0xC9f93163c99695c6526b799EbcA2207Fdf7D61aD](https://etherscan.io/address/0xC9f93163c99695c6526b799EbcA2207Fdf7D61aD) |
-| DODO Pair: WOO-USDT           | [0x181d93ea28023bf40c8bb94796c55138719803b4](https://etherscan.io/address/0x181d93ea28023bf40c8bb94796c55138719803b4) |
-| DODO Pair: wCRES-USDT           | [0x85f9569b69083c3e6aeffd301bb2c65606b5d575](https://etherscan.io/address/0x85f9569b69083c3e6aeffd301bb2c65606b5d575) |
+| DODO Pair: WOO-USDT            | [0x181d93ea28023bf40c8bb94796c55138719803b4](https://etherscan.io/address/0x181d93ea28023bf40c8bb94796c55138719803b4) |
+| DODO Pair: wCRES-USDT          | [0x85f9569b69083c3e6aeffd301bb2c65606b5d575](https://etherscan.io/address/0x85f9569b69083c3e6aeffd301bb2c65606b5d575) |
 | DODO Zoo                       | [0x3a97247df274a17c59a3bd12735ea3fcdfb49950](https://etherscan.io/address/0x3a97247df274a17c59a3bd12735ea3fcdfb49950) |
-| DODO EthProxy                  | [0x37adc35f7b12582240818df04aac04ca409d5913](https://etherscan.io/address/0x37adc35f7b12582240818df04aac04ca409d5913) |
-| DODO EthProxy (compatible)     | [0x3d7cbd8ae59505283d438eb6ff54b8b42d0c98a6](https://etherscan.io/address/0x3d7cbd8ae59505283d438eb6ff54b8b42d0c98a6) |
 | Uniswap arbitrageur            | [0xbf90b54cc00ceeaa93db1f6a54a01e3fe9ed4422](https://etherscan.io/address/0xbf90b54cc00ceeaa93db1f6a54a01e3fe9ed4422) |
 | Multisig Wallet with Time Lock | [0x6dae6ae227438378c117821c51fd61661faa8893](https://etherscan.io/address/0x6dae6ae227438378c117821c51fd61661faa8893) |
 | Gnosis Multisig Wallet         | [0x95C4F5b83aA70810D4f142d58e5F7242Bd891CB0](https://etherscan.io/address/0x95C4F5b83aA70810D4f142d58e5F7242Bd891CB0) |
