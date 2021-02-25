@@ -9,6 +9,7 @@ sidebar_label: 开发者信息
 | 合约                            | 地址                                                                                                                  |
 | ------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | DODO Token                      | [0x43dfc4159d86f3a37a5a4b3d4580b888ad7d4ddd](https://etherscan.io/address/0x43dfc4159d86f3a37a5a4b3d4580b888ad7d4ddd) |
+| vDODO Token                     | [0xc4436fBAE6eBa5d95bf7d53Ae515F8A707Bd402A](https://etherscan.io/address/0xc4436fBAE6eBa5d95bf7d53Ae515F8A707Bd402A) |
 | DODO Pair: DODO-USDT            | [0x8876819535b48b551c9e97ebc07332c7482b4b2d](https://etherscan.io/address/0x8876819535b48b551c9e97ebc07332c7482b4b2d) |
 | DODO Mining                     | [0xaed7384f03844af886b830862ff0a7afce0a632c](https://etherscan.io/address/0xaed7384f03844af886b830862ff0a7afce0a632c) |
 | Pre-allocation                  | [0x0e504d3e053885a82bd1cb5c29cbaae5b3673be4](https://etherscan.io/address/0x0e504d3e053885a82bd1cb5c29cbaae5b3673be4) |
