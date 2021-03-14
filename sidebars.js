@@ -2,7 +2,7 @@ module.exports = {
   docs: {
     项目简介: ["briefIntro"],
     协议相关: ["pmm", "pmmDetails", "math"],
-    应用场景: ["publicPool", "privatePool", "crowdPooling"],
+    应用场景: ["publicPool", "privatePool", "crowdPooling","upCrowdPooling"],
     合约相关: [
       "framework",
       "contractUseGuide",
